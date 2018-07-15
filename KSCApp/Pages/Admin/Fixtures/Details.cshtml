@@ -1,0 +1,43 @@
+﻿@page
+@model KSCApp.Pages.Admin.Fixtures.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Fixture</h4>
+    <hr />
+    <dl class="dl-horizontal well">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fixture.TeamA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.TeamA.TeamId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fixture.TeamB)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.TeamB.TeamId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fixture.PlayDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.PlayDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fixture.League)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.League.LeagueId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Fixture.FixtureId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

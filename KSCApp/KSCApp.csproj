@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-KSCApp-63D0B85D-E70C-4B76-86FF-D69C2645FD1A</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180708131614_EntityA.cs" />
+    <Compile Remove="Data\Migrations\20180708131614_EntityA.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180708132609_EntityB.cs" />
+    <Compile Remove="Data\Migrations\20180708132609_EntityB.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180708134645_EntityC.cs" />
+    <Compile Remove="Data\Migrations\20180708134645_EntityC.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180709181119_EntityE.cs" />
+    <Compile Remove="Data\Migrations\20180709181119_EntityE.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180709191523_PlayerTypeEnum.cs" />
+    <Compile Remove="Data\Migrations\20180709191523_PlayerTypeEnum.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180709195054_ChangePlayingLeague.cs" />
+    <Compile Remove="Data\Migrations\20180709195054_ChangePlayingLeague.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Pages\Admin\KSCAppUsers\" />
+  </ItemGroup>
+
+</Project>

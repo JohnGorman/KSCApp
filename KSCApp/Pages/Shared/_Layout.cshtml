@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KSCApp</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-Cerulean.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-brand logo">
+
+            </div>
+            <div>
+                <img id="logonew" src="~/images/KSC_Logo.gif" />
+            </div>
+            <a href="#" class="navbar-left">
+
+            </a>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle logo" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a asp-page="/Index" class="navbar-brand text-uppercase">Killala Squash Club</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-page="/Index">Home</a></li>
+                    <li><a asp-page="/About">About</a></li>
+                    <li><a asp-page="/Contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href#="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a asp-page="/Admin/Leagues/Index">Leagues</a></li>
+                            <li><a asp-page="/Admin/Players/Index">Players</a></li>
+                            <li><a asp-page="/Admin/Teams/Index">Teams</a></li>
+                            <li><a asp-page="/Admin/TeamPlayers/Index">Team Players</a></li>
+                            <li><a asp-page="/Admin/Fixtures/Index">Fixtures</a></li>
+                            <li><a asp-page="/Admin/Matches/Index">Matches</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
+    <partial name="_CookieConsentPartial" />
+    <div>
+        <div class="container body-content jumbotron">
+            @RenderBody()
+            <hr />
+        </div>
+        <footer>
+            <p>&copy; 2018 - Killala Squash Club, Killala Community Centre, Ballina Road, Killala, Co.Mayo.</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

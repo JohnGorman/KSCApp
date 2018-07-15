@@ -1,0 +1,64 @@
+﻿@page
+@model KSCApp.Pages.Admin.TeamPlayers.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TeamPlayer</h4>
+    <hr />
+    <dl class="dl-horizontal well">
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.Level)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.Level)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.MatchesPlayed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.MatchesPlayed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.MatchesWon)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.MatchesWon)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.GamesWon)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.GamesWon)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.GamesLost)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.GamesLost)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.Player)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.Player.PlayerId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.Team)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.Team.TeamId)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="TeamPlayer.TeamPlayerId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

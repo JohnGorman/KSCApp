@@ -1,0 +1,78 @@
+﻿@page
+@model KSCApp.Pages.Admin.Matches.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="blueTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Match[0].PlayerA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Match[0].PlayerB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Match[0].Level)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Match[0].Played)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Match[0].PlayedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Match[0].PlayerAgames)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Match[0].PlayerBgames)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Match[0].Fixture)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Match) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerA.ContactNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerB.ContactNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Played)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerAgames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerBgames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fixture.FixtureId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.MatchId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.MatchId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.MatchId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

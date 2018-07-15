@@ -1,0 +1,43 @@
+﻿@page
+@model KSCApp.Pages.Admin.Teams.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="dl-horizontal well">
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.TeamName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.TeamName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.TeamNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.TeamNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.TeamLogo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.TeamLogo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.League)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.League.LeagueId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Team.TeamId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

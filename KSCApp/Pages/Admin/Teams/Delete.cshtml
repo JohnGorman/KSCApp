@@ -1,0 +1,46 @@
+﻿@page
+@model KSCApp.Pages.Admin.Teams.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="dl-horizontal well">
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.TeamName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.TeamName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.TeamNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.TeamNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.TeamLogo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.TeamLogo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.League)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.League.LeagueId)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Team.TeamId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

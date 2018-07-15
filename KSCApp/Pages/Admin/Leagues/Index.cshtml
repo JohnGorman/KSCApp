@@ -1,0 +1,66 @@
+﻿@page
+@model KSCApp.Pages.Admin.Leagues.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="blueTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.League[0].LeagueName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.League[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.League[0].Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.League[0].NoOfLevels)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.League[0].FixturesMade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.League[0].LeagueType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.League) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeagueName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoOfLevels)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FixturesMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeagueType)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.LeagueId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.LeagueId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.LeagueId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

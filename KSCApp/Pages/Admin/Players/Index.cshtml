@@ -1,0 +1,78 @@
+﻿@page
+@model KSCApp.Pages.Admin.Players.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="blueTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].PlayerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Rank)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].PlayerStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].PlayingLeague)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].PlayerType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].ContactNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].ProfilePicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].UserId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Player) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rank)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayingLeague)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfilePicture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.PlayerId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.PlayerId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.PlayerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

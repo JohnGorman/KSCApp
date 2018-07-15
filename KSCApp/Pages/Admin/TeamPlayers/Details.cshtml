@@ -1,0 +1,61 @@
+﻿@page
+@model KSCApp.Pages.Admin.TeamPlayers.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TeamPlayer</h4>
+    <hr />
+    <dl class="dl-horizontal well">
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.Level)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.Level)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.MatchesPlayed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.MatchesPlayed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.MatchesWon)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.MatchesWon)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.GamesWon)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.GamesWon)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.GamesLost)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.GamesLost)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.Player)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.Player.PlayerId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.Team)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.Team.TeamId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.TeamPlayer.TeamPlayerId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

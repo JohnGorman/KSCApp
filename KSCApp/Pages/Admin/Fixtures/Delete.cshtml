@@ -1,0 +1,46 @@
+﻿@page
+@model KSCApp.Pages.Admin.Fixtures.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Fixture</h4>
+    <hr />
+    <dl class="dl-horizontal well">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fixture.TeamA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.TeamA.TeamId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fixture.TeamB)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.TeamB.TeamId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fixture.PlayDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.PlayDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fixture.League)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.League.LeagueId)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Fixture.FixtureId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

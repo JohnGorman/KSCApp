@@ -1,0 +1,54 @@
+﻿@page
+@model KSCApp.Pages.Admin.Fixtures.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="blueTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fixture[0].TeamA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fixture[0].TeamB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fixture[0].PlayDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fixture[0].League)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Fixture) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamA.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamB.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.League.LeagueId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FixtureId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.FixtureId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FixtureId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

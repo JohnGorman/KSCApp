@@ -1,0 +1,67 @@
+﻿@page
+@model KSCApp.Pages.Admin.Players.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Player</h4>
+    <hr />
+    <dl class="dl-horizontal well">
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.PlayerName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player.PlayerName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.Rank)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player.Rank)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.PlayerStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player.PlayerStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.PlayingLeague)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player.PlayingLeague)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.PlayerType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player.PlayerType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.ContactNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player.ContactNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.ProfilePicture)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player.ProfilePicture)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.KSCAppUser.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player.KSCAppUser.Email)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Player.PlayerId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
