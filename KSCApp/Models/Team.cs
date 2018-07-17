@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KSCApp.Models
 {
@@ -15,8 +17,11 @@ namespace KSCApp.Models
         }
 
         public int TeamId { get; set; }
+        [Display (Name ="Team Name")]
         public string TeamName { get; set; }
+        [Display(Name = "Team No")]
         public int TeamNo { get; set; }
+        [Display(Name = "Team Logo")]
         public byte[] TeamLogo { get; set; }
         public int LeagueId { get; set; }
 

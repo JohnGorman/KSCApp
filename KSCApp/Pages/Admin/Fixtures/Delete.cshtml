@@ -2,7 +2,7 @@
 @model KSCApp.Pages.Admin.Fixtures.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Fixture";
 }
 
 <h2>Delete</h2>
@@ -11,7 +11,7 @@
 <div>
     <h4>Fixture</h4>
     <hr />
-    <dl class="dl-horizontal well">
+    <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Fixture.TeamA)
         </dt>
@@ -40,7 +40,7 @@
     
     <form method="post">
         <input type="hidden" asp-for="Fixture.FixtureId" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <input type="submit" value="Delete" class="btn btn-primary" /> |
         <a asp-page="./Index">Back to List</a>
     </form>
 </div>

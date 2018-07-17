@@ -2,7 +2,7 @@
 @model KSCApp.Pages.Admin.Fixtures.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Fixture";
 }
 
 <h2>Edit</h2>
@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post" class="well">
+        <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Fixture.FixtureId" />
             <div class="form-group">
@@ -35,7 +35,7 @@
                 <span asp-validation-for="Fixture.PlayDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -18,13 +18,14 @@ namespace KSCApp.Models
         public int LeagueId { get; set; }
 
         public int TeamAId { get; set; }
-        [ForeignKey("TeamAId")]
+        [ForeignKey("TeamAId"), Display(Name = "Team A")]
         public virtual Team TeamA { get; set; }
 
         public int TeamBId { get; set; }
-        [ForeignKey("TeamBId")]
+        [ForeignKey("TeamBId"), Display(Name = "Team B")]
         public virtual Team TeamB { get; set; }
 
+        [DataType(DataType.Date), Display(Name = "Date")]
         public DateTime PlayDate { get; set; }
 
         public League League { get; set; }

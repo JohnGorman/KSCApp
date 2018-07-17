@@ -53,7 +53,7 @@ namespace KSCApp
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
-                    options.Conventions.AuthorizePage("/About", "RequireAdministratorRole");
+                    options.Conventions.AuthorizeFolder("/Admin", "RequireAdministratorRole");
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

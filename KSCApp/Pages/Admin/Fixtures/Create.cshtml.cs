@@ -21,7 +21,7 @@ namespace KSCApp.Pages.Admin.Fixtures
 
         public IActionResult OnGet()
         {
-        ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueId");
+        ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueName");
         ViewData["TeamAId"] = new SelectList(_context.Team, "TeamId", "TeamName");
         ViewData["TeamBId"] = new SelectList(_context.Team, "TeamId", "TeamName");
             return Page();

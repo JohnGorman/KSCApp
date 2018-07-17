@@ -20,18 +20,20 @@ namespace KSCApp.Models
         //public DateTime? MatchDateTime { get; set; }
 
         public int PlayerAId { get; set; }
-        [ForeignKey("PlayerAId")]
+        [ForeignKey("PlayerAId"), Display (Name ="Player A")]
         public Player PlayerA { get; set; }
 
         public int PlayerBId { get; set; }
-        [ForeignKey("PlayerBId")]
+        [ForeignKey("PlayerBId"), Display(Name = "Player B")]
         public Player PlayerB { get; set; }
 
 
         public int? Level { get; set; }
         public bool? Played { get; set; }
         public DateTime? PlayedDate { get; set; }
+        [Display(Name = "Player A Games")]
         public int PlayerAgames { get; set; }
+        [Display(Name = "Player B Games")]
         public int PlayerBgames { get; set; }
 
         public Fixture Fixture { get; set; }
