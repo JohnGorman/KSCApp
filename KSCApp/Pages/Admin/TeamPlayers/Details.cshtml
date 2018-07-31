@@ -8,9 +8,21 @@
 <h2>Details</h2>
 
 <div>
-    <h4>TeamPlayer</h4>
+    <h4>Team Player</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.Team)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.Team.TeamName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamPlayer.Player)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamPlayer.Player.PlayerName)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.TeamPlayer.Level)
         </dt>
@@ -41,18 +53,8 @@
         <dd>
             @Html.DisplayFor(model => model.TeamPlayer.GamesLost)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamPlayer.Player)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TeamPlayer.Player.PlayerId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamPlayer.Team)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TeamPlayer.Team.TeamId)
-        </dd>
+
+
     </dl>
 </div>
 <div>

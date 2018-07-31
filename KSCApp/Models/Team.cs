@@ -21,6 +21,7 @@ namespace KSCApp.Models
         public string TeamName { get; set; }
         [Display(Name = "Team No")]
         public int TeamNo { get; set; }
+        public string Section { get; set; }
         [Display(Name = "Team Logo")]
         public byte[] TeamLogo { get; set; }
         public int LeagueId { get; set; }

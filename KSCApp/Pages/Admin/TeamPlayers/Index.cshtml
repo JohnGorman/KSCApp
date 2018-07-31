@@ -5,14 +5,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Team Players</h2>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="blueTable">
+<table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamPlayer[0].Team.TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamPlayer[0].Player.PlayerName)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.TeamPlayer[0].Level)
             </th>
@@ -28,18 +34,20 @@
             <th>
                 @Html.DisplayNameFor(model => model.TeamPlayer[0].GamesLost)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TeamPlayer[0].Player)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TeamPlayer[0].Team)
-            </th>
+
+
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.TeamPlayer) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player.PlayerName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Level)
             </td>
@@ -55,12 +63,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.GamesLost)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Player.PlayerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Team.TeamId)
-            </td>
+
+
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.TeamPlayerId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.TeamPlayerId">Details</a> |

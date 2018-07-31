@@ -12,16 +12,22 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Fixture.League)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.League.LeagueName)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Fixture.TeamA)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Fixture.TeamA.TeamId)
+            @Html.DisplayFor(model => model.Fixture.TeamA.TeamName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Fixture.TeamB)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Fixture.TeamB.TeamId)
+            @Html.DisplayFor(model => model.Fixture.TeamB.TeamName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Fixture.PlayDate)
@@ -33,7 +39,7 @@
             @Html.DisplayNameFor(model => model.Fixture.League)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Fixture.League.LeagueId)
+            @Html.DisplayFor(model => model.Fixture.League.LeagueName)
         </dd>
     </dl>
 </div>

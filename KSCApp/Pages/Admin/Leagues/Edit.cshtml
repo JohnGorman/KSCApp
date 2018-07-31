@@ -25,27 +25,26 @@
                 <span asp-validation-for="League.StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="League.Active" /> @Html.DisplayNameFor(model => model.League.Active)
-                    </label>
-                </div>
+                <label asp-for="League.Active" class="control-label"></label>
+                <input asp-for="League.Active" class="form-control" />
+                <span asp-validation-for="League.Active" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="League.NoOfLevels" class="control-label"></label>
                 <input asp-for="League.NoOfLevels" class="form-control" />
                 <span asp-validation-for="League.NoOfLevels" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="League.FixturesMade" /> @Html.DisplayNameFor(model => model.League.FixturesMade)
-                    </label>
-                </div>
+                <label asp-for="League.FixturesMade" class="control-label"></label>
+                <input asp-for="League.FixturesMade" class="form-control" />
+                <span asp-validation-for="League.FixturesMade" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="League.LeagueType" class="control-label"></label>
-                <select asp-for="League.LeagueType" class="form-control"></select>
+                <select asp-for="League.LeagueType" asp-items="Html.GetEnumSelectList<KSCApp.Models.LeagueType>()" class="form-control"></select>
                 <span asp-validation-for="League.LeagueType" class="text-danger"></span>
             </div>
             <div class="form-group">

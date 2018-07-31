@@ -15,17 +15,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Fixture.FixtureId" />
             <div class="form-group">
-                <label asp-for="Fixture.LeagueId" class="control-label"></label>
+                <label asp-for="Fixture.League.LeagueName" class="control-label"></label>
                 <select asp-for="Fixture.LeagueId" class="form-control" asp-items="ViewBag.LeagueId"></select>
                 <span asp-validation-for="Fixture.LeagueId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Fixture.TeamAId" class="control-label"></label>
+                <label asp-for="Fixture.TeamA.TeamName" class="control-label"></label>
                 <select asp-for="Fixture.TeamAId" class="form-control" asp-items="ViewBag.TeamAId"></select>
                 <span asp-validation-for="Fixture.TeamAId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Fixture.TeamBId" class="control-label"></label>
+                <label asp-for="Fixture.TeamB.TeamName" class="control-label"></label>
                 <select asp-for="Fixture.TeamBId" class="form-control" asp-items="ViewBag.TeamBId"></select>
                 <span asp-validation-for="Fixture.TeamBId" class="text-danger"></span>
             </div>

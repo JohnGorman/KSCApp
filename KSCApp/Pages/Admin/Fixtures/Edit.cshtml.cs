@@ -39,9 +39,9 @@ namespace KSCApp.Pages.Admin.Fixtures
             {
                 return NotFound();
             }
-           ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueId");
-           ViewData["TeamAId"] = new SelectList(_context.Team, "TeamId", "TeamId");
-           ViewData["TeamBId"] = new SelectList(_context.Team, "TeamId", "TeamId");
+           ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueName");
+           ViewData["TeamAId"] = new SelectList(_context.Team, "TeamId", "TeamName");
+           ViewData["TeamBId"] = new SelectList(_context.Team, "TeamId", "TeamName");
             return Page();
         }
 

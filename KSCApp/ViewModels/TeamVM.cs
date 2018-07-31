@@ -5,21 +5,23 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace KSCApp.Models
+namespace KSCApp.ViewModels
 {
-    public partial class TeamPlayer
+    public class TeamVM
     {
-        public int TeamPlayerId { get; set; }
+        public int LeagueId { get; set; }
 
         public int TeamId { get; set; }
-        public Team Team { get; set; }
 
-        public int PlayerId { get; set; }
-        public Player Player { get; set; }
+        [Display(Name = "Team Name")]
+        public string TeamName { get; set; }
 
-        public int Level { get; set; }
+        [Display(Name = "Team No")]
+        public int TeamNo { get; set; }
 
-        [Display(Name ="Matches Played")]
+        public string Section { get; set; }
+
+        [Display(Name = "Matches Played")]
         public int? MatchesPlayed { get; set; }
 
         [Display(Name = "Matches Won")]
@@ -30,6 +32,7 @@ namespace KSCApp.Models
 
         [Display(Name = "Games Lost")]
         public int? GamesLost { get; set; }
+
 
     }
 }

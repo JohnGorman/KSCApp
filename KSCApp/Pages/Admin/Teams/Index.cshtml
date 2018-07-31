@@ -5,12 +5,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Teams</h2>
 
-<p>
+@*<p>
     <a asp-page="Create">Create New</a>
-</p>
-<table class="blueTable">
+</p>*@
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -23,7 +23,10 @@
                 @Html.DisplayNameFor(model => model.Team[0].TeamLogo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Team[0].League)
+                @Html.DisplayNameFor(model => model.Team[0].League.LeagueName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team[0].Section)
             </th>
             <th></th>
         </tr>
@@ -41,12 +44,15 @@
                 @Html.DisplayFor(modelItem => item.TeamLogo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.League.LeagueId)
+                @Html.DisplayFor(modelItem => item.League.LeagueName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Section)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.TeamId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.TeamId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.TeamId">Delete</a>
+                <a asp-page="./Details" asp-route-id="@item.TeamId">Details</a> @*|
+                <a asp-page="./Delete" asp-route-id="@item.TeamId">Delete</a>*@
             </td>
         </tr>
 }

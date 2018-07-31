@@ -3,5 +3,83 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<div class="HomeTitle">
+    @*<h2>League Table</h2>*@
+    <h2>@Model.SelectedLeague.LeagueName</h2>
+</div>
+<br/>
 
-<h1>League Table - TBA</h1>
+<div class="col-lg-3 LeagueSelect">
+    <div>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="SelectedLeague.LeagueName" class="control-label"></label>*@
+                <label class="control-label">Select League</label>
+                <select asp-for="SelectedLeague.LeagueId" class="form-control" asp-items="ViewBag.LeagueId" onchange="this.form.submit()"></select>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LeagueTable[0].TeamNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeagueTable[0].TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeagueTable[0].MatchesPlayed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeagueTable[0].MatchesWon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeagueTable[0].GamesWon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeagueTable[0].GamesLost)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LeagueTable)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatchesPlayed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatchesWon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GamesWon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GamesLost)
+                </td>
+
+                <td>
+                    <a asp-page="./Teams" asp-route-id="@item.TeamId">View</a>
+
+                    
+                    @*<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

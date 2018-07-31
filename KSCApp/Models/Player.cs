@@ -24,18 +24,18 @@ namespace KSCApp.Models
         }
 
         public int PlayerId { get; set; }
-        [Required, Display(Name ="Player Name")]
+        [Required, Display(Name ="Name")]
         public string PlayerName { get; set; }
 
         public int? Rank { get; set; }
 
-        [EnumDataType(typeof(PlayerStatusEnum)), Display(Name ="Player Status")]
+        [EnumDataType(typeof(PlayerStatusEnum)), Display(Name ="Status")]
         public PlayerStatusEnum PlayerStatus { get; set; }
 
         [Required, Display(Name = "Playing League")]
         public bool PlayingLeague { get; set; }
 
-        [EnumDataType(typeof(PlayerTypeEnum)), Display(Name = "Player Type")]
+        [EnumDataType(typeof(PlayerTypeEnum)), Display(Name = "Type")]
         public PlayerTypeEnum PlayerType { get; set; }
 
         [Required, Display(Name ="Contact No")]

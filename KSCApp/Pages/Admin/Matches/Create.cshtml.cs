@@ -22,8 +22,8 @@ namespace KSCApp.Pages.Admin.Matches
         public IActionResult OnGet()
         {
         ViewData["FixtureId"] = new SelectList(_context.Fixture, "FixtureId", "FixtureId");
-        ViewData["PlayerAId"] = new SelectList(_context.Player, "PlayerId", "ContactNo");
-        ViewData["PlayerBId"] = new SelectList(_context.Player, "PlayerId", "ContactNo");
+        ViewData["PlayerAId"] = new SelectList(_context.Player, "PlayerId", "PlayerName");
+        ViewData["PlayerBId"] = new SelectList(_context.Player, "PlayerId", "PlayerName");
             return Page();
         }
 

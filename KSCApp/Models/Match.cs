@@ -29,12 +29,13 @@ namespace KSCApp.Models
 
 
         public int? Level { get; set; }
-        public bool? Played { get; set; }
+        public bool Played { get; set; }
+        [Display(Name ="Date Played")]
         public DateTime? PlayedDate { get; set; }
         [Display(Name = "Player A Games")]
-        public int PlayerAgames { get; set; }
+        public int? PlayerAgames { get; set; }
         [Display(Name = "Player B Games")]
-        public int PlayerBgames { get; set; }
+        public int? PlayerBgames { get; set; }
 
         public Fixture Fixture { get; set; }
 

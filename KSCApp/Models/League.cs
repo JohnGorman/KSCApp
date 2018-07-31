@@ -15,7 +15,7 @@ namespace KSCApp.Models
         {
             Fixtures = new HashSet<Fixture>();
             Teams = new HashSet<Team>();
-            this.FixturesMade = false;
+            //this.FixturesMade = false;
         }
 
         public int LeagueId { get; set; }
@@ -29,7 +29,10 @@ namespace KSCApp.Models
         [Required, Display(Name = "Active")]
         public bool Active { get; set; }
 
-        [Display(Name = "No of Levels")]
+        [Display(Name = "Junior Levels")]
+        public int JuniorLevels { get; set; }
+
+        [Display(Name = "Senior Levels")]
         public int NoOfLevels { get; set; }
 
         [Required, Display(Name = "Fixtures Made")]

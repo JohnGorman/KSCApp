@@ -32,6 +32,14 @@ namespace KSCApp.Pages.Admin.Players
 
             Player = await _context.Player.FirstOrDefaultAsync(m => m.PlayerId == id);
 
+            var userlist = _context.Users.Select(u => new
+            {
+                Id = u.Id,
+                Email = u.Email
+            }).ToList();
+
+            ViewData["SelectUserId"] = new SelectList(userlist, "Id", "Email");
+
             if (Player == null)
             {
                 return NotFound();

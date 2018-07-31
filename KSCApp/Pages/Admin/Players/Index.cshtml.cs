@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KSCApp.Data;
 using KSCApp.Models;
+using KSCApp.ViewModels;
 
 namespace KSCApp.Pages.Admin.Players
 {
@@ -20,33 +21,28 @@ namespace KSCApp.Pages.Admin.Players
         }
 
         public IList<Player> Player { get;set; }
+        public IList<PlayerVM> lplayerVM { get; set; }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            Player = await _context.Player.ToListAsync();
+            //Player = await _context.Player
+            //                        .Include(u=>u.KSCAppUser).ToListAsync();
 
+            //List<PlayerVM> lplayerVM = new List<PlayerVM>();
 
-            //var userlist = _context.Users.Select(u => new
-            //{
-            //    Id = u.Id,
-            //    Email = u.Email
-            //}).ToList();
+            lplayerVM = (from player in _context.Player join user in _context.Users on player.UserId equals user.Id into pvm from con in pvm.DefaultIfEmpty() select new PlayerVM
+            {
+                Id = player.PlayerId,
+                PlayerName = player.PlayerName,
+                PlayerStatus = player.PlayerStatus,
+                PlayingLeague = player.PlayingLeague,
+                ProfilePicture = player.ProfilePicture,
+                ContactNo = player.ContactNo,
+                PlayerType = player.PlayerType,
+                Rank = player.Rank,
+                Email = con.Email
+            }).ToList();
 
-            //var PlayerView = _context.Player
-            //                            .Join(userlist, 
-            //                                    p=>p.UserId,
-            //                                    u=>u.Id,
-            //                                    (p, u)=> new
-            //                                    {
-            //                                        PlayerID = p.PlayerId,
-            //                                        PlayerName = p.PlayerName,
-            //                                        PlayerStatus = p.PlayerStatus,
-            //                                        PlayingLeague = p.PlayingLeague,
-            //                                        PlayerType = p.PlayerType,
-            //                                        ContactNo = p.ContactNo,
-            //                                        PlayerEmail = u.Email
-
-            //                                    });
         }
     }
 }

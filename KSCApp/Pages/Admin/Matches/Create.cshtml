@@ -18,12 +18,12 @@
                 <select asp-for="Match.FixtureId" class ="form-control" asp-items="ViewBag.FixtureId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Match.PlayerAId" class="control-label"></label>
-                <select asp-for="Match.PlayerAId" class ="form-control" asp-items="ViewBag.PlayerAId"></select>
+                <label asp-for="Match.PlayerA" class="control-label"></label>
+                <select asp-for="Match.PlayerA.PlayerName" class ="form-control" asp-items="ViewBag.PlayerAId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Match.PlayerBId" class="control-label"></label>
-                <select asp-for="Match.PlayerBId" class ="form-control" asp-items="ViewBag.PlayerBId"></select>
+                <label asp-for="Match.PlayerB" class="control-label"></label>
+                <select asp-for="Match.PlayerB.PlayerName" class ="form-control" asp-items="ViewBag.PlayerBId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Match.Level" class="control-label"></label>

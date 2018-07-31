@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using KSCApp.Data;
 using KSCApp.Models;
 
-namespace KSCApp.Pages.Admin.TeamPlayers
+namespace KSCApp.Pages.Admin.MatchSlots
 {
     public class CreateModel : PageModel
     {
@@ -21,13 +21,12 @@ namespace KSCApp.Pages.Admin.TeamPlayers
 
         public IActionResult OnGet()
         {
-        ViewData["PlayerId"] = new SelectList(_context.Player, "PlayerId", "PlayerName");
-        ViewData["TeamId"] = new SelectList(_context.Team, "TeamId", "TeamName");
+        ViewData["MatchId"] = new SelectList(_context.Match, "MatchId", "MatchId");
             return Page();
         }
 
         [BindProperty]
-        public TeamPlayer TeamPlayer { get; set; }
+        public MatchSlot MatchSlot { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -36,7 +35,7 @@ namespace KSCApp.Pages.Admin.TeamPlayers
                 return Page();
             }
 
-            _context.TeamPlayer.Add(TeamPlayer);
+            _context.MatchSlot.Add(MatchSlot);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using KSCApp.Data;
 using KSCApp.Models;
 
-namespace KSCApp.Pages.Admin.TeamPlayers
+namespace KSCApp.Pages.Admin.MatchSlots
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace KSCApp.Pages.Admin.TeamPlayers
         }
 
         [BindProperty]
-        public TeamPlayer TeamPlayer { get; set; }
+        public MatchSlot MatchSlot { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,16 +30,14 @@ namespace KSCApp.Pages.Admin.TeamPlayers
                 return NotFound();
             }
 
-            TeamPlayer = await _context.TeamPlayer
-                .Include(t => t.Player)
-                .Include(t => t.Team).FirstOrDefaultAsync(m => m.TeamPlayerId == id);
+            MatchSlot = await _context.MatchSlot
+                .Include(m => m.Match).FirstOrDefaultAsync(m => m.MatchSlotId == id);
 
-            if (TeamPlayer == null)
+            if (MatchSlot == null)
             {
                 return NotFound();
             }
-           ViewData["PlayerId"] = new SelectList(_context.Player, "PlayerId", "PlayerName");
-           ViewData["TeamId"] = new SelectList(_context.Team, "TeamId", "TeamName");
+           ViewData["MatchId"] = new SelectList(_context.Match, "MatchId", "MatchId");
             return Page();
         }
 
@@ -50,7 +48,7 @@ namespace KSCApp.Pages.Admin.TeamPlayers
                 return Page();
             }
 
-            _context.Attach(TeamPlayer).State = EntityState.Modified;
+            _context.Attach(MatchSlot).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +56,7 @@ namespace KSCApp.Pages.Admin.TeamPlayers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TeamPlayerExists(TeamPlayer.TeamPlayerId))
+                if (!MatchSlotExists(MatchSlot.MatchSlotId))
                 {
                     return NotFound();
                 }
@@ -71,9 +69,9 @@ namespace KSCApp.Pages.Admin.TeamPlayers
             return RedirectToPage("./Index");
         }
 
-        private bool TeamPlayerExists(int id)
+        private bool MatchSlotExists(int id)
         {
-            return _context.TeamPlayer.Any(e => e.TeamPlayerId == id);
+            return _context.MatchSlot.Any(e => e.MatchSlotId == id);
         }
     }
 }

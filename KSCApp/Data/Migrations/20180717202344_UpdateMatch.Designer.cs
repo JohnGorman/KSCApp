@@ -4,14 +4,16 @@ using KSCApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KSCApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180717202344_UpdateMatch")]
+    partial class UpdateMatch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,8 +76,6 @@ namespace KSCApp.Data.Migrations
                     b.Property<bool>("Active");
 
                     b.Property<bool>("FixturesMade");
-
-                    b.Property<int>("JuniorLevels");
 
                     b.Property<string>("LeagueName");
 
@@ -144,9 +144,9 @@ namespace KSCApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BookingSlot");
-
                     b.Property<int?>("MatchId");
+
+                    b.Property<DateTime>("MyProperty");
 
                     b.Property<int?>("SlotMinutes");
 
@@ -218,8 +218,6 @@ namespace KSCApp.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("LeagueId");
-
-                    b.Property<string>("Section");
 
                     b.Property<byte[]>("TeamLogo");
 

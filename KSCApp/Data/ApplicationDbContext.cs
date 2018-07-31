@@ -23,5 +23,6 @@ namespace KSCApp.Data
         public DbSet<KSCApp.Models.RankHistory> RankHistory { get; set; }
         public DbSet<KSCApp.Models.LevelTime> LevelTime { get; set; }
         public DbSet<KSCApp.Models.KSCAppUser> KSCAppUser { get; set; }
+        public DbSet<KSCApp.Models.MatchSlot> MatchSlot { get; set; }
     }
 }

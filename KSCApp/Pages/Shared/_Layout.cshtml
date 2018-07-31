@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - KSCApp</title>
+    <title>@ViewData["Title"]- Killala Squash Club</title>
 
     <environment include="Development">
         @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
@@ -21,27 +21,21 @@
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
-            <div class="navbar-brand logo">
-
-            </div>
-            <div>
-                <img id="logonew" src="~/images/KSC_Logo.gif" />
-            </div>
-            <a href="#" class="navbar-left">
-
-            </a>
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle logo" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-                <a asp-page="/Index" class="navbar-brand text-uppercase">Killala Squash Club</a>
+                @*<img class="logonew img-responsive" src="~/images/KSC_Logo.gif" />*@
+                <a asp-page="/Index" class="navbar-brand">
+                    <img class="logonew" alt="Killala-Squash-Logo" src="~/images/KSC_Logo_R2.gif"/>
+                </a>
             </div>
+
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-left">
                     <li><a asp-page="/Index">Home</a></li>
                     <li><a asp-page="/About">About</a></li>
                     <li><a asp-page="/Contact">Contact</a></li>
@@ -64,9 +58,13 @@
 
     <partial name="_CookieConsentPartial" />
     <div>
-        <div class="container body-content jumbotron">
-            @RenderBody()
-            <hr />
+        <div class="wrapper">
+            <div class="container table-responsive">
+
+                @RenderBody()
+
+                <hr />
+            </div>
         </div>
         <footer>
             <p>&copy; 2018 - Killala Squash Club, Killala Community Centre, Ballina Road, Killala, Co.Mayo.</p>

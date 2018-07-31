@@ -10,7 +10,8 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="blueTable">
+
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -41,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.PlayDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.League.LeagueId)
+                @Html.DisplayFor(modelItem => item.League.LeagueName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.FixtureId">Edit</a> |

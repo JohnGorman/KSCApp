@@ -5,43 +5,43 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Player List</h2>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="blueTable">
+<table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Player[0].PlayerName)
+                @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Player[0].Rank)
+                @Html.DisplayNameFor(model => model.lplayerVM[0].Rank)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Player[0].PlayerStatus)
+                @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Player[0].PlayingLeague)
+                @Html.DisplayNameFor(model => model.lplayerVM[0].PlayingLeague)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Player[0].PlayerType)
+                @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Player[0].ContactNo)
+                @Html.DisplayNameFor(model => model.lplayerVM[0].ContactNo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Player[0].ProfilePicture)
+                @Html.DisplayNameFor(model => model.lplayerVM[0].ProfilePicture)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Player[0].UserId)
+                @Html.DisplayNameFor(model => model.lplayerVM[0].Email)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Player) {
+@foreach (var item in Model.lplayerVM) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.PlayerName)
@@ -65,12 +65,12 @@
                 @Html.DisplayFor(modelItem => item.ProfilePicture)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.PlayerId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.PlayerId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.PlayerId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

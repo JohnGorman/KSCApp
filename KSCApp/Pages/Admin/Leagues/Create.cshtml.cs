@@ -35,9 +35,32 @@ namespace KSCApp.Pages.Admin.Leagues
             }
 
             _context.League.Add(League);
+            _context.SaveChanges();
+
+            //Create 8 new teams for the league
+            //Team[] teams = new Team[8];
+            string section = "A";
+            for (int i = 1; i < 9; i++)
+            {
+                if (League.LeagueType == LeagueType.Short && i>4)
+                {
+                    section = "B";
+                }
+                Team team = new Team { TeamNo = i, TeamName = "Team No " + i, Section=section, LeagueId=League.LeagueId };
+                _context.Team.Add(team);
+            }
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+
         }
+                    
+
+
+
+
+
+        
     }
 }

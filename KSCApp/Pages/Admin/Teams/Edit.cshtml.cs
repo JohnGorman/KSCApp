@@ -37,7 +37,7 @@ namespace KSCApp.Pages.Admin.Teams
             {
                 return NotFound();
             }
-           ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueId");
+           ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueName");
             return Page();
         }
 
