@@ -1,0 +1,39 @@
+﻿@page
+@model KSCApp.Pages.Admin.LevelTimes.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Level Time</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LevelTime.Level" class="control-label"></label>
+                <input asp-for="LevelTime.Level" class="form-control" />
+                <span asp-validation-for="LevelTime.Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LevelTime.StartTime" class="control-label"></label>
+                <input asp-for="LevelTime.StartTime" class="form-control" />
+                <span asp-validation-for="LevelTime.StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

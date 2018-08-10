@@ -1,0 +1,49 @@
+﻿@page
+@model KSCApp.Pages.Admin.FixtureDates.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Fixture Date</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FixtureDate.LeagueType" class="control-label"></label>
+                <select asp-for="FixtureDate.LeagueType" asp-items="Html.GetEnumSelectList<KSCApp.Models.LeagueType>()" class="form-control"></select>
+                <span asp-validation-for="FixtureDate.LeagueType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FixtureDate.TeamANo" class="control-label"></label>
+                <input asp-for="FixtureDate.TeamANo" class="form-control" />
+                <span asp-validation-for="FixtureDate.TeamANo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FixtureDate.TeamBNo" class="control-label"></label>
+                <input asp-for="FixtureDate.TeamBNo" class="form-control" />
+                <span asp-validation-for="FixtureDate.TeamBNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FixtureDate.StartDaysPlus" class="control-label"></label>
+                <input asp-for="FixtureDate.StartDaysPlus" class="form-control" />
+                <span asp-validation-for="FixtureDate.StartDaysPlus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

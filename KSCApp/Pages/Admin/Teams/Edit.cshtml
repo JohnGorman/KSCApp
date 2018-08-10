@@ -24,10 +24,15 @@
                 <input asp-for="Team.TeamNo" class="form-control" />
                 <span asp-validation-for="Team.TeamNo" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+            <label asp-for="Team.TeamLogo" class="control-label"></label>
+            <input asp-for="Team.TeamLogo" class="form-control" />
+            <span asp-validation-for="Team.TeamLogo" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
-                <label asp-for="Team.TeamLogo" class="control-label"></label>
-                <input asp-for="Team.TeamLogo" class="form-control" />
-                <span asp-validation-for="Team.TeamLogo" class="text-danger"></span>
+                <label asp-for="Team.Section" class="control-label"></label>
+                <input asp-for="Team.Section" class="form-control" />
+                <span asp-validation-for="Team.Section" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Team.League.LeagueName" class="control-label"></label>

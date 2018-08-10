@@ -4,12 +4,14 @@ body {
     padding-bottom: 20px;
     height: 100%;
     padding-top: 80px;
+    background:#2174bd;
+    background: rgba(3,58,110,0.9);
     background-image: url('../images/Squash_Court.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     position: relative;
-    margin-bottom:50px;
+    margin-bottom: 50px;
 }
 
 h2 {
@@ -22,6 +24,10 @@ h4 {
     font-size: 200%;
     font-weight: 500;
     color: #52AEFF;
+}
+
+p {
+    color: lightblue;
 }
 
 label {
@@ -58,7 +64,7 @@ form-control {
 
 
 .logonew {
-    max-height: 100px;
+    max-height: 80px;
     float: left;
     margin-top: -14px;
     margin-bottom:-14px;
@@ -82,16 +88,38 @@ form-control {
 
 .navbar {
     border-bottom: 5px solid orange;
+    min-height:20px;
 }
 
 .navbar-right {
-    margin-right:5px;
+    margin-right:1px;
 }
 
 .well {
-    border: 5px solid #2174bd;
-    background: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    border: 3px solid orange;
+    border-radius: 0px;
+    /*background: white;
+    background: rgba(255, 255, 255, 0.8);*/
+    color: orange;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #eeeeee; /* Old browsers */
+    background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
 }
+
+    .well h3 {
+        color: darkorange;
+        font-size:2em;
+        font-weight:700;
+    }
+
+    .well p {
+        color: #2174bd;
+    }
 
 .dl-horizontal {
     color:orange;
@@ -103,29 +131,34 @@ form-control {
     display: block;
     position: center;
     height: 75%;
-    background: rgba(3,58,110,0.9);
+    background: #2174bd;
+    background: rgba(3,58,110,0.8);
     border: 8px solid #52AEFF;
     border-radius: 10px;
     -webkit-box-shadow: 0px 0px 5px 5px #52AEFF;
     box-shadow: 0px 0px 15px 15px #52AEFF;
-    margin-top: 50px;
+    margin-top: 30px;
     padding-top: 10px;
 }
 
 .wrapper {
-    position:relative;
-    min-height:80vh;
-    padding-bottom:25px;
+    position: relative;
+    min-height: 90vh;
+    margin-bottom:100px;
+    padding-bottom:100px;
 }
 
 
 footer {
-    position:absolute;
-    bottom:0px;
-    height:20px;
+    /*position:absolute;
+    bottom:20px;
+    margin-top:-20px;
+    height:40px;
     width:100%;
     display:block;
-    float:left;
+    float:left;*/
+    color: darkgrey;
+    padding-top:5px;
 }
 
 
@@ -145,21 +178,47 @@ formbackground {
 
 .LeagueSelect {
     display: block;
-    float:right;
+    float: right;
+    padding-right:5px;
+}
+
+.TeamPlayerSelect {
+    display: block;
+    float: right;
+    padding-left:5px;
+
 }
 
 .HomeTitle {
     display: block;
     float:left;
+
 }
 
-table{
+.availableSlots {
+    display: block;
+    float:left;
+    width:100%;
+    height:100px;
+}
+
+table {
+    background-color:white;
     background-color:rgba(255,255,255,0.7);
 }
 
 table thead {
+    background-color:orange;
     background-color:rgba(255, 153, 0, 0.85);
     color:white;
+}
+
+.topdiv {
+    width: 100%;
+    min-height: 120px;
+    overflow:hidden;
+    position: relative;
+    padding:10px;
 }
 
 
@@ -179,9 +238,11 @@ table thead {
 
     body {
         background-image: none;
-        padding:0px;
-        margin:0px;
-        padding-top:50px;
+        padding: 0px;
+        margin: 0px;
+        padding-top: 50px;
+        background: #2174bd;
+        background: rgba(3,58,110,0.9);
     }
 
     h2 {
@@ -192,21 +253,45 @@ table thead {
     .container {
         all: initial;
         all: unset;
-        display:block;
+        display: block;
         width: 100%;
+        min-height: 100%;
+        position: absolute;
         border: none;
-        border-radius:0px;
+        border-radius: 0px;
         box-shadow: none;
         margin-top: 0px;
+        padding-bottom: 100px;
         padding-top: 1px;
+        background: #2174bd;
         background: rgba(3,58,110,0.9);
+        overflow:scroll;
     }
 
     .LeagueSelect {
-        float:right;
+        float:left;
         width:100%;
-        margin:0px;
+        margin:5px;
         padding:0px;
+    }
+
+    .TeamPlayerSelect {
+        float: left;
+        width: 100%;
+        margin-left: 5px;
+        margin-bottom:5px;
+        padding: 0px;
+    }
+
+    .topdiv {
+        width: 100%;
+        min-height: 210px;
+        position: relative;
+    }
+
+    footer {
+        /*height:50px;*/
+        color:darkgrey;
     }
 
 }

@@ -18,7 +18,9 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
+
 <body>
+<div class="wrapper">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -28,17 +30,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @*<img class="logonew img-responsive" src="~/images/KSC_Logo.gif" />*@
                 <a asp-page="/Index" class="navbar-brand">
-                    <img class="logonew" alt="Killala-Squash-Logo" src="~/images/KSC_Logo_R2.gif"/>
+                    <img class="logonew" alt="Killala-Squash-Logo" src="~/images/KSC_Logo_R2.gif" />
                 </a>
             </div>
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-left">
                     <li><a asp-page="/Index">Home</a></li>
-                    <li><a asp-page="/About">About</a></li>
-                    <li><a asp-page="/Contact">Contact</a></li>
+                    <li><a asp-page="/Fixtures">Fixtures</a></li>
+                    <li><a asp-page="/Schedule">Schedule</a></li>
+                    <li><a asp-page="Members/Reschedule">ReSchedule</a></li>
                     <li class="dropdown">
                         <a href#="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
@@ -46,8 +48,10 @@
                             <li><a asp-page="/Admin/Players/Index">Players</a></li>
                             <li><a asp-page="/Admin/Teams/Index">Teams</a></li>
                             <li><a asp-page="/Admin/TeamPlayers/Index">Team Players</a></li>
+                            <li><a asp-page="/Admin/LevelTimes/Index">Level Times</a></li>
                             <li><a asp-page="/Admin/Fixtures/Index">Fixtures</a></li>
                             <li><a asp-page="/Admin/Matches/Index">Matches</a></li>
+                            <li><a asp-page="/Admin/FixtureDates/Index">Fixture Dates</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -57,19 +61,19 @@
     </nav>
 
     <partial name="_CookieConsentPartial" />
-    <div>
-        <div class="wrapper">
-            <div class="container table-responsive">
 
-                @RenderBody()
 
-                <hr />
-            </div>
+        <div class="container table-responsive">
+
+            @RenderBody()
+
+            <br />
         </div>
-        <footer>
-            <p>&copy; 2018 - Killala Squash Club, Killala Community Centre, Ballina Road, Killala, Co.Mayo.</p>
-        </footer>
-    </div>
+
+    <footer class="navbar navbar-fixed-bottom navbar-inverse">
+        <p>&copy; 2018 - Killala Squash Club, Killala Community Centre, Ballina Road, Killala, Co.Mayo.</p>
+    </footer>
+</div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

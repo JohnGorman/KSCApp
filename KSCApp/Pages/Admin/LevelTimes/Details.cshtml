@@ -1,0 +1,31 @@
+﻿@page
+@model KSCApp.Pages.Admin.LevelTimes.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LevelTime</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LevelTime.Level)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LevelTime.Level)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LevelTime.StartTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LevelTime.StartTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.LevelTime.LevelTimeId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -34,9 +34,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Match[0].PlayerBgames)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Match[0].Fixture)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -44,10 +44,10 @@
 @foreach (var item in Model.Match) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PlayerA.ContactNo)
+                @Html.DisplayFor(modelItem => item.PlayerA.PlayerName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PlayerB.ContactNo)
+                @Html.DisplayFor(modelItem => item.PlayerB.PlayerName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Level)
@@ -64,9 +64,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PlayerBgames)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Fixture.FixtureId)
-            </td>
+            </td>*@
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.MatchId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.MatchId">Details</a> |

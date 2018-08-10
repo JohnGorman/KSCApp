@@ -44,6 +44,25 @@ namespace KSCApp.Data.Migrations
                     b.ToTable("Fixture");
                 });
 
+            modelBuilder.Entity("KSCApp.Models.FixtureDate", b =>
+                {
+                    b.Property<int>("FixtureDateId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LeagueType");
+
+                    b.Property<int>("StartDaysPlus");
+
+                    b.Property<int>("TeamANo");
+
+                    b.Property<int>("TeamBNo");
+
+                    b.HasKey("FixtureDateId");
+
+                    b.ToTable("FixtureDate");
+                });
+
             modelBuilder.Entity("KSCApp.Models.GameResult", b =>
                 {
                     b.Property<int>("GameResultId")

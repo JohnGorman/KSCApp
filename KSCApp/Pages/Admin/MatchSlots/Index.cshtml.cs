@@ -23,8 +23,7 @@ namespace KSCApp.Pages.Admin.MatchSlots
 
         public async Task OnGetAsync()
         {
-            MatchSlot = await _context.MatchSlot
-                .Include(m => m.Match).ToListAsync();
+            MatchSlot = await _context.MatchSlot.ToListAsync();
         }
     }
 }

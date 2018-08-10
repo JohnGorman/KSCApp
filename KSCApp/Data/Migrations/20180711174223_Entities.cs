@@ -298,7 +298,7 @@ namespace KSCApp.Data.Migrations
                         column: x => x.MatchId,
                         principalTable: "Match",
                         principalColumn: "MatchId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

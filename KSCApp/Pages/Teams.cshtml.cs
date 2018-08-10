@@ -35,6 +35,7 @@ namespace KSCApp.Pages
 
             Team = await _context.TeamPlayer.Where(tp => tp.TeamId == id)
                                             .Include(p=>p.Player)
+                                            .OrderBy(t=>t.Level)
                                             .ToListAsync();
 
 

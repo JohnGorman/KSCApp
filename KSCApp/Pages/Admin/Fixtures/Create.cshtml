@@ -14,10 +14,11 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Fixture.League.LeagueName" class="control-label"></label>
-                <select asp-for="Fixture.LeagueId" class ="form-control" asp-items="ViewBag.LeagueId"></select>
+                @*<label asp-for="Fixture.League.LeagueName" class="control-label"></label>*@
+                <label class="control-label">Select League</label>
+                <select asp-for="SelectedLeagueId" class ="form-control" asp-items="ViewBag.LeagueId"></select>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Fixture.TeamA.TeamName" class="control-label"></label>
                 <select asp-for="Fixture.TeamAId" class ="form-control" asp-items="ViewBag.TeamAId"></select>
             </div>
@@ -29,9 +30,9 @@
                 <label asp-for="Fixture.PlayDate" class="control-label"></label>
                 <input asp-for="Fixture.PlayDate" class="form-control" />
                 <span asp-validation-for="Fixture.PlayDate" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create Fixtures and Matches" class="btn btn-primary" />
             </div>
         </form>
     </div>

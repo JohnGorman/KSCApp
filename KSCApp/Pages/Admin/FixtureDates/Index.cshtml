@@ -1,0 +1,56 @@
+﻿@page
+@model KSCApp.Pages.Admin.FixtureDates.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Fixture Dates</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+    <br/>
+    Note: These are used as a template when creating match fixtures for new leagues but not afterwards
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FixtureDate[0].LeagueType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FixtureDate[0].TeamANo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FixtureDate[0].TeamBNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FixtureDate[0].StartDaysPlus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.FixtureDate) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeagueType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamANo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamBNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDaysPlus)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FixtureDateId">Edit</a> |
+                @*<a asp-page="./Details" asp-route-id="@item.FixtureDateId">Details</a> |*@
+                <a asp-page="./Delete" asp-route-id="@item.FixtureDateId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,13 +1,13 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Leagues";
 }
 <div class="HomeTitle">
     @*<h2>League Table</h2>*@
     <h2>@Model.SelectedLeague.LeagueName</h2>
 </div>
-<br/>
+<br />
 
 <div class="col-lg-3 LeagueSelect">
     <div>
@@ -22,33 +22,39 @@
     </div>
 </div>
 
-
-<table class="table">
+@if (Model.SelectedLeague.LeagueType == Models.LeagueType.Short)
+{
+    <br/>
+    <br/>
+    <br/>
+    <h3>Section A</h3>
+}
+<table class="table table-condensed">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.LeagueTable[0].TeamNo)
+                @Html.DisplayNameFor(model => model.LeagueTableA[0].TeamNo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LeagueTable[0].TeamName)
+                @Html.DisplayNameFor(model => model.LeagueTableA[0].TeamName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LeagueTable[0].MatchesPlayed)
+                @Html.DisplayNameFor(model => model.LeagueTableA[0].MatchesPlayed)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LeagueTable[0].MatchesWon)
+                @Html.DisplayNameFor(model => model.LeagueTableA[0].MatchesWon)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LeagueTable[0].GamesWon)
+                @Html.DisplayNameFor(model => model.LeagueTableA[0].GamesWon)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LeagueTable[0].GamesLost)
+                @Html.DisplayNameFor(model => model.LeagueTableA[0].GamesLost)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.LeagueTable)
+        @foreach (var item in Model.LeagueTableA)
         {
             <tr>
                 <td>
@@ -73,9 +79,9 @@
                 <td>
                     <a asp-page="./Teams" asp-route-id="@item.TeamId">View</a>
 
-                    
+
                     @*<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
 
 
                 </td>
@@ -83,3 +89,69 @@
         }
     </tbody>
 </table>
+
+@if (Model.SelectedLeague.LeagueType == Models.LeagueType.Short)
+{
+    <h3>Section B</h3>
+
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeagueTableB[0].TeamNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeagueTableB[0].TeamName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeagueTableB[0].MatchesPlayed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeagueTableB[0].MatchesWon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeagueTableB[0].GamesWon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeagueTableB[0].GamesLost)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LeagueTableB)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MatchesPlayed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MatchesWon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GamesWon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GamesLost)
+                    </td>
+
+                    <td>
+                        <a asp-page="./Teams" asp-route-id="@item.TeamId">View</a>
+
+
+                        @*<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

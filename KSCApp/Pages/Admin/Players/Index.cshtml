@@ -2,7 +2,7 @@
 @model KSCApp.Pages.Admin.Players.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Players";
 }
 
 <h2>Player List</h2>
@@ -14,11 +14,15 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerName)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerName)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.lplayerVM[0].Rank)
-            </th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.RankSort">
+                    @Html.DisplayNameFor(model => model.lplayerVM[0].Rank)
+                </a>
+</th>
             <th>
                 @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerStatus)
             </th>
@@ -31,9 +35,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.lplayerVM[0].ContactNo)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.lplayerVM[0].ProfilePicture)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.lplayerVM[0].Email)
             </th>
@@ -61,9 +65,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ContactNo)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.ProfilePicture)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>

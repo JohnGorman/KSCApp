@@ -5,23 +5,40 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Teams</h2>
+<div class="HomeTitle">
+    <h2>@Model.SelectedLeague.LeagueName</h2>
+    <h3>Teams</h3>
+</div>
+<br />
+
+<div class="col-lg-3 LeagueSelect">
+    <div>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="SelectedLeague.LeagueName" class="control-label"></label>*@
+                <label class="control-label">Select League</label>
+                <select asp-for="SelectedLeague.LeagueId" class="form-control" asp-items="ViewBag.LeagueId" onchange="this.form.submit()"></select>
+            </div>
+        </form>
+    </div>
+</div>
 
 @*<p>
-    <a asp-page="Create">Create New</a>
-</p>*@
+        <a asp-page="Create">Create New</a>
+    </p>*@
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Team[0].TeamName)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Team[0].TeamNo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Team[0].TeamLogo)
+                @Html.DisplayNameFor(model => model.Team[0].TeamName)
             </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Team[0].TeamLogo)
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Team[0].League.LeagueName)
             </th>
@@ -32,17 +49,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Team) {
+        @foreach (var item in Model.Team)
+        {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamName)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TeamNo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TeamLogo)
+                @Html.DisplayFor(modelItem => item.TeamName)
             </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.TeamLogo)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.League.LeagueName)
             </td>
@@ -52,9 +70,9 @@
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.TeamId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.TeamId">Details</a> @*|
-                <a asp-page="./Delete" asp-route-id="@item.TeamId">Delete</a>*@
+            <a asp-page="./Delete" asp-route-id="@item.TeamId">Delete</a>*@
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

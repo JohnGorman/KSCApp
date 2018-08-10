@@ -1,0 +1,46 @@
+﻿@page
+@model KSCApp.Pages.Members.RescheduleModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<h2>Re-Schedule Match</h2>
+<br/>
+<h4>Cancelled Matches</h4>
+
+
+<div class="topdiv">
+    @foreach (var item in Model.CancelledMatches)
+    {
+        <div class="well col-lg-4">
+            <p>
+                @Html.DisplayFor(modelItem => item.Fixture.League.LeagueName)
+            </p>
+            <p>
+                (L @item.Level) @item.PlayerA.PlayerName v @item.PlayerB.PlayerName
+            </p>
+
+            <a asp-page="Members/MatchScore" asp-route-id="@item.MatchId">Enter Result</a> |
+            <a asp-page="./MatchToSlot" asp-route-id="@item.MatchId">Re-Schedule</a>
+        </div>
+    }
+</div>
+<br/>
+<h4>Over Due Matches</h4>
+<div class="topdiv">
+    @foreach (var item in Model.OverDueMatches)
+    {
+        <div class="well col-lg-4">
+            <p>
+                @Html.DisplayFor(modelItem => item.Match.Fixture.League.LeagueName)
+            </p>
+            <p>
+                (L @item.Match.Level) @item.Match.PlayerA.PlayerName v @item.Match.PlayerB.PlayerName
+            </p>
+            <p>Originally Planned @item.BookingSlot.ToShortDateString() </p>
+
+            <a asp-page="Members/MatchScore" asp-route-id="@item.Match.MatchId">Enter Result</a> |
+            <a asp-page="./MatchToSlot" asp-route-id="@item.Match.MatchId">Re-Schedule</a>
+        </div>
+    }
+</div>

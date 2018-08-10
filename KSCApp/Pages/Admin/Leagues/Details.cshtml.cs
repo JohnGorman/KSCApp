@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KSCApp.Data;
 using KSCApp.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using KSCApp.ViewModels;
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Http;
 
 namespace KSCApp.Pages.Admin.Leagues
 {
@@ -30,11 +34,23 @@ namespace KSCApp.Pages.Admin.Leagues
 
             League = await _context.League.FirstOrDefaultAsync(m => m.LeagueId == id);
 
+
             if (League == null)
             {
                 return NotFound();
             }
             return Page();
+        }
+
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+
+            return RedirectToPage("./Index");
         }
     }
 }

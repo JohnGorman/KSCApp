@@ -1,12 +1,6 @@
 ﻿@page
 @model KSCApp.Pages.Admin.MatchSlots.DetailsModel
 
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h2>Details</h2>
-
 <div>
     <h4>MatchSlot</h4>
     <hr />
@@ -22,12 +16,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.MatchSlot.SlotMinutes)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MatchSlot.Match)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MatchSlot.Match.MatchId)
         </dd>
     </dl>
 </div>

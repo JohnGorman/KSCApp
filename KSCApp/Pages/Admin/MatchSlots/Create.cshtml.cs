@@ -21,7 +21,6 @@ namespace KSCApp.Pages.Admin.MatchSlots
 
         public IActionResult OnGet()
         {
-        ViewData["MatchId"] = new SelectList(_context.Match, "MatchId", "MatchId");
             return Page();
         }
 

@@ -42,5 +42,7 @@ namespace KSCApp.Models
 
         public ICollection<GameResult> GameResults { get; set; }
         public ICollection<MatchSlot> MatchSlots { get; set; }
+
+
     }
 }

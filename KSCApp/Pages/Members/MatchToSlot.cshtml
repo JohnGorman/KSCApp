@@ -1,0 +1,57 @@
+﻿@page
+@model KSCApp.Pages.Members.MatchToSlotModel
+
+
+@*<h2>Details</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Fixture.FixtureId" />
+            <div class="form-group">
+                <label asp-for="Fixture.League.LeagueName" class="control-label"></label>
+                <select asp-for="Fixture.LeagueId" class="form-control" asp-items="ViewBag.LeagueId"></select>
+                <span asp-validation-for="Fixture.LeagueId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fixture.TeamA.TeamName" class="control-label"></label>
+                <select asp-for="Fixture.TeamAId" class="form-control" asp-items="ViewBag.TeamAId"></select>
+                <span asp-validation-for="Fixture.TeamAId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fixture.TeamB.TeamName" class="control-label"></label>
+                <select asp-for="Fixture.TeamBId" class="form-control" asp-items="ViewBag.TeamBId"></select>
+                <span asp-validation-for="Fixture.TeamBId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fixture.PlayDate" class="control-label"></label>
+                <input asp-for="Fixture.PlayDate" class="form-control" />
+                <span asp-validation-for="Fixture.PlayDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>*@
+
+
+<div class="col-lg-6">
+    <div>
+        <form method="post">
+            <div class="form-group">
+                <div class="well">
+                    <input type = "hidden" asp-for="MatchSlotSelectVM.SelectedMatchId" class="form-control" />
+                    <p>@Model.MatchSlotSelectVM.LeagueName</p>
+                    <h3>@Model.MatchSlotSelectVM.MatchDetails</h3>
+                </div>
+                <label class="control-label">Select Available Slots</label>
+                <select asp-for="MatchSlotSelectVM.SelectedMatchSlotId" class="form-control" asp-items="ViewBag.MatchSlotId"></select>
+                <br/>
+                <div class="form-group">
+                    <input type="submit" value="Book this Slot" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

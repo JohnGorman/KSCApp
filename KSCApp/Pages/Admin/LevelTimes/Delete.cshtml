@@ -1,0 +1,34 @@
+﻿@page
+@model KSCApp.Pages.Admin.LevelTimes.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Level Time</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LevelTime.Level)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LevelTime.Level)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LevelTime.StartTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LevelTime.StartTime)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="LevelTime.LevelTimeId" />
+        <input type="submit" value="Delete" class="btn btn-primary" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

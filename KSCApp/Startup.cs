@@ -50,6 +50,8 @@ namespace KSCApp
             {
                 options.AddPolicy("RequireAdministratorRole",
                     policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireMemberRole",
+                    policy => policy.RequireRole("Member"));
             });
 
 
@@ -57,6 +59,7 @@ namespace KSCApp
                 .AddRazorPagesOptions(options =>
                 {
                     options.Conventions.AuthorizeFolder("/Admin", "RequireAdministratorRole");
+                    options.Conventions.AuthorizeFolder("/Members", "RequireMemberRole");
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

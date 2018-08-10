@@ -30,14 +30,12 @@ namespace KSCApp.Pages.Admin.MatchSlots
                 return NotFound();
             }
 
-            MatchSlot = await _context.MatchSlot
-                .Include(m => m.Match).FirstOrDefaultAsync(m => m.MatchSlotId == id);
+            MatchSlot = await _context.MatchSlot.FirstOrDefaultAsync(m => m.MatchSlotId == id);
 
             if (MatchSlot == null)
             {
                 return NotFound();
             }
-           ViewData["MatchId"] = new SelectList(_context.Match, "MatchId", "MatchId");
             return Page();
         }
 

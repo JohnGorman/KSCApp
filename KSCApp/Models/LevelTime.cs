@@ -9,8 +9,15 @@ namespace KSCApp.Models
 {
     public partial class LevelTime
     {
+        public LevelTime()
+        {
+
+        }
+
         public int LevelTimeId { get; set; }
+
         public int Level { get; set; }
+
         [Display(Name = "Start Time")]
         public TimeSpan StartTime { get; set; }
     }
