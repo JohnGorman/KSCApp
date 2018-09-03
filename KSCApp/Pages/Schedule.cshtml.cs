@@ -33,7 +33,7 @@ namespace KSCApp.Pages
 
         public async Task OnGetAsync()
         {
-            ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueName");
+            ViewData["LeagueId"] = new SelectList(_context.League.Where(l=>l.Active == true), "LeagueId", "LeagueName");
 
             string tempLeagueString = HttpContext.Session.GetString("SelectedLeague");
             string tempSelectDateString = HttpContext.Session.GetString("SelectedDate");
@@ -51,7 +51,7 @@ namespace KSCApp.Pages
             }
 
             if (SelectedLeague.LeagueId<1)
-                SelectedLeague = _context.League.OrderByDescending(l => l.LeagueId).First();
+                SelectedLeague = _context.League.OrderByDescending(l => l.LeagueId).FirstOrDefault(l=>l.Active==true);
 
             SSVM.CurrentLeagueId = SelectedLeague.LeagueId;
 
@@ -72,7 +72,7 @@ namespace KSCApp.Pages
 
             SSVM.SelectedDate = compareDate;
 
-            ScheduleList = await _context.MatchSlot.Where(ms => ms.BookingSlot.Date == compareDate.Date)
+            ScheduleList = await _context.MatchSlot.Where(ms => ms.BookingSlot.Date == compareDate.Date && ms.Match.Played != true)
                 .Include(ms => ms.Match)
                 .Include(ms => ms.Match.Fixture)
                 .Include(ms => ms.Match.Fixture.League)
@@ -83,6 +83,7 @@ namespace KSCApp.Pages
                 .Select(ms => new ScheduleVM
                 {
                     MatchSlotId = ms.MatchSlotId,
+                    MatchId = ms.MatchId ?? 0,
                     MatchDetails = string.Format("(L{0}) {1} v {2}", ms.Match.Level, ms.Match.PlayerA.PlayerName, ms.Match.PlayerB.PlayerName),
                     FixtureDetails = string.Format("Team No.{0} {1} v Team No.{2} {3}", ms.Match.Fixture.TeamA.TeamNo, ms.Match.Fixture.TeamA.TeamName
                         , ms.Match.Fixture.TeamB.TeamNo, ms.Match.Fixture.TeamB.TeamName),
@@ -93,7 +94,7 @@ namespace KSCApp.Pages
                 .AsNoTracking()
                 .ToListAsync();
 
-            AvailableSlots = await _context.MatchSlot.Where(ms => ms.BookingSlot.Date == compareDate.Date && ms.MatchId == null)
+            AvailableSlots = await _context.MatchSlot.Where(ms => ms.BookingSlot.Date == compareDate.Date && ms.MatchId == null && ms.BookingSlot.ToUniversalTime() > DateTime.Now.ToUniversalTime())
                 .OrderBy(ms=>ms.BookingSlot)
                 .AsNoTracking().
                 ToListAsync();
@@ -104,7 +105,7 @@ namespace KSCApp.Pages
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return RedirectToPage("./Schedule");
             }
 
             if (SSVM.CurrentLeagueId!=null)

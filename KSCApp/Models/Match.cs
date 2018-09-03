@@ -30,7 +30,7 @@ namespace KSCApp.Models
 
         public int? Level { get; set; }
         public bool Played { get; set; }
-        [Display(Name ="Date Played")]
+        [Display(Name ="Date Played"), DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? PlayedDate { get; set; }
         [Display(Name = "Player A Games")]
         public int? PlayerAgames { get; set; }

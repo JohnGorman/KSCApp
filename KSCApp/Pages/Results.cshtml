@@ -1,0 +1,43 @@
+﻿@page
+@model KSCApp.Pages.ResultsModel
+@{
+    ViewData["Title"] = "Results";
+}
+<div class="topdiv">
+    <div class="HomeTitle">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+    <br />
+
+    <div class="LeagueSelect col-lg-7">
+        <div class="form-horizontal">
+            <form method="post" class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group col-lg-5 TeamPlayerSelect">
+                    <label class="control-label">Select League</label>
+                    <select asp-for="@Model.SelectedLeague.LeagueId" class="form-control glyphicon-align-center" asp-items="ViewBag.LeagueId" onchange="this.form.submit()"></select>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="topdiv">
+    <hr/>
+    @foreach (var item in Model.ResultList)
+    {
+        <div class="well col-lg-6 col-lg-offset-3">
+            <h6>
+                @item.FixtureDetails
+            </h6>
+            <h4>
+                @item.MatchDetails
+            </h4>
+            <p>
+                @item.GameResults : @item.DatePlayed
+            </p>
+
+        </div>
+    }
+</div>
+

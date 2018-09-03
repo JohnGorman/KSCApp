@@ -6,7 +6,7 @@ body {
     padding-top: 80px;
     background:#2174bd;
     background: rgba(3,58,110,0.9);
-    background-image: url('../images/Squash_Court.jpg');
+    background-image: url('../images/Squash_Court2.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -21,7 +21,7 @@ h2 {
 }
 
 h4 {
-    font-size: 200%;
+    font-size: 180%;
     font-weight: 500;
     color: #52AEFF;
 }

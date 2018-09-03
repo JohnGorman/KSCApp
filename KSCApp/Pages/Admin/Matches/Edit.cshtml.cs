@@ -40,8 +40,8 @@ namespace KSCApp.Pages.Admin.Matches
                 return NotFound();
             }
            ViewData["FixtureId"] = new SelectList(_context.Fixture, "FixtureId", "FixtureId");
-           ViewData["PlayerAId"] = new SelectList(_context.Player, "PlayerId", "ContactNo");
-           ViewData["PlayerBId"] = new SelectList(_context.Player, "PlayerId", "ContactNo");
+           ViewData["PlayerAId"] = new SelectList(_context.Player.OrderBy(p=>p.PlayerName), "PlayerId", "PlayerName");
+           ViewData["PlayerBId"] = new SelectList(_context.Player.OrderBy(p => p.PlayerName), "PlayerId", "PlayerName");
             return Page();
         }
 

@@ -49,8 +49,38 @@ namespace KSCApp.Pages.Admin.Leagues
 
             if (League != null)
             {
+                if (League.Fixtures != null)
+                {
+                    var fixtures = _context.Fixture.Where(f => f.LeagueId == League.LeagueId);
+                    foreach (var fixture in fixtures)
+                    {
+                        var matches = _context.Match.Where(m => m.FixtureId == fixture.FixtureId);
+                        foreach (var match in matches)
+                        {
+                            var results = _context.GameResult.Where(gr => gr.MatchId == match.MatchId);
+                            foreach (var result in results)
+                            {
+                                _context.GameResult.Remove(result);
+                            }
+                            var slots = _context.MatchSlot.Where(ms => ms.MatchId == match.MatchId);
+                            foreach (var solt in slots)
+                            {
+                                _context.MatchSlot.Remove(solt);
+                            }
+                                _context.Match.Remove(match);
+                        }
+                        _context.Fixture.Remove(fixture);
+                    }                    
+                }
                 _context.League.Remove(League);
-                await _context.SaveChangesAsync();
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch
+                {
+                    throw;
+                }               
             }
 
             return RedirectToPage("./Index");

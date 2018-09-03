@@ -1,0 +1,48 @@
+﻿@page
+@model KSCApp.Pages.Admin.KSCAppUsers.IndexModel
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>User List</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Users
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AllUsersAndRoles[0].Roles)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var usr in Model.AllUsersAndRoles)
+        {
+            <tr>
+                <td>
+                    @usr.UserName
+                </td>
+                <td>
+                    @foreach (var role in usr.Roles)
+                    {
+                        <div>@role</div>
+                        }
+                </td>
+                <td>
+                <a asp-page="./Delete" asp-route-id="@usr.UserId">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

@@ -32,7 +32,7 @@ namespace KSCApp.Pages
 
         public async Task OnGetAsync()
         {
-            ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueName");
+            ViewData["LeagueId"] = new SelectList(_context.League.Where(l=>l.Active == true), "LeagueId", "LeagueName");
 
             string tempLeagueString = HttpContext.Session.GetString("SelectedLeague");
 
@@ -41,11 +41,11 @@ namespace KSCApp.Pages
             if (tempLeagueString != null)
             {
                 CurrentLeagueId = Convert.ToInt32(tempLeagueString);
-                SelectedLeague = _context.League.FirstOrDefault(l => l.LeagueId == CurrentLeagueId);
+                SelectedLeague = _context.League.FirstOrDefault(l => l.LeagueId == CurrentLeagueId && l.Active == true);
             }
 
             if (SelectedLeague == null)
-                SelectedLeague = _context.League.OrderByDescending(l => l.LeagueId).First();
+                SelectedLeague = _context.League.OrderByDescending(l => l.LeagueId).FirstOrDefault(l=>l.Active == true);
 
             CurrentLeagueId = SelectedLeague.LeagueId;
 
@@ -68,7 +68,7 @@ namespace KSCApp.Pages
 
             HttpContext.Session.SetString("SelectedLeague", SelectedLeague.LeagueId.ToString());
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Fixtures");
         }
     }
 }

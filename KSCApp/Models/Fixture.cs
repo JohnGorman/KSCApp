@@ -25,7 +25,7 @@ namespace KSCApp.Models
         [ForeignKey("TeamBId"), Display(Name = "Team B")]
         public virtual Team TeamB { get; set; }
 
-        [DataType(DataType.Date), Display(Name = "Date")]
+        [DataType(DataType.Date), Display(Name = "Date"), DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
         public DateTime PlayDate { get; set; }
 
         public League League { get; set; }

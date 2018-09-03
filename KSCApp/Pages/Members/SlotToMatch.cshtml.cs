@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using KSCApp.Models;
 
 namespace KSCApp.Pages.Members
@@ -24,7 +25,7 @@ namespace KSCApp.Pages.Members
         {
             try
             {
-                MatchSlot = _context.MatchSlot.Where(ms => ms.MatchSlotId == id).FirstOrDefault();
+                MatchSlot = await _context.MatchSlot.FirstOrDefaultAsync(ms => ms.MatchSlotId == id);
 
                 //ViewData[""]
             }

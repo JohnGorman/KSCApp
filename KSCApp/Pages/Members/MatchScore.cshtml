@@ -1,9 +1,138 @@
 ﻿@page
 @model KSCApp.Pages.Members.MatchScoreModel
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
 
-<h2>Enter Match Score</h2>
-<br/>
-<p>Todo; Enter Match Score and update team scores...</p>
+
+<div class="topdiv">
+    <h2>Enter Match Score</h2>
+</div>
+
+<div class="well col-lg-6 col-lg-offset-3">
+    <h3>@Model.Match.Fixture.League.LeagueName</h3>
+    <form method="post">
+        <input type="hidden" asp-for="@Model.resultsVM.MatchId" class="form-control" />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <p>Game</p>
+                    </th>
+                    <th>
+                        <p>@Model.Match.PlayerA.PlayerName</p>
+                    </th>
+                    <th><p>v</p></th>
+                    <th>
+                        <p>@Model.Match.PlayerB.PlayerName</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        1
+                    </td>
+
+                    <td>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="resultsVM.Game1PlayerAScore" class="form-control" />
+                            <span asp-validation-for="resultsVM.Game1PlayerAScore" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="resultsVM.Game1PlayerBScore" class="form-control" />
+                            <span asp-validation-for="resultsVM.Game1PlayerBScore" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        2
+                    </td>
+                    <td>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="resultsVM.Game2PlayerAScore" class="form-control" />
+                            <span asp-validation-for="resultsVM.Game2PlayerAScore" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="resultsVM.Game2PlayerBScore" class="form-control" />
+                            <span asp-validation-for="resultsVM.Game2PlayerBScore" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        3
+                    </td>
+                    <td>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="resultsVM.Game3PlayerAScore" class="form-control" />
+                            <span asp-validation-for="resultsVM.Game3PlayerAScore" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="resultsVM.Game3PlayerBScore" class="form-control" />
+                            <span asp-validation-for="resultsVM.Game3PlayerBScore" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        4
+                    </td>
+                    <td>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="resultsVM.Game4PlayerAScore" class="form-control" />
+                            <span asp-validation-for="resultsVM.Game4PlayerAScore" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="resultsVM.Game4PlayerBScore" class="form-control" />
+                            <span asp-validation-for="resultsVM.Game4PlayerBScore" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        5
+                    </td>
+                    <td>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="resultsVM.Game5PlayerAScore" class="form-control" />
+                            <span asp-validation-for="resultsVM.Game5PlayerAScore" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="resultsVM.Game5PlayerBScore" class="form-control" />
+                            <span asp-validation-for="resultsVM.Game5PlayerBScore" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <input type="submit" value="Post Result" class="btn btn-primary" />
+        </div>
+    </form>
+    <a asp-page="./Index">Cancel</a>
+</div>

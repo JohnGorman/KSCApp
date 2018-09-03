@@ -11,7 +11,7 @@ namespace KSCApp.ViewModels
     {
         public int? CurrentLeagueId { get; set; }
 
-        [DataType(DataType.Date), Display(Name = "Select Date")]
+        [DataType(DataType.Date), Display(Name = "Select Date"), Required]
         public DateTime SelectedDate { get; set; }
     }
 }

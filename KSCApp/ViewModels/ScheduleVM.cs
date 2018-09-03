@@ -21,6 +21,8 @@ namespace KSCApp.ViewModels
 
         public int MatchSlotId { get; set; }
 
+        public int MatchId { get; set; }
+
         [Display(Name ="Fixture Details")]
         public string FixtureDetails { get; set; }
 
@@ -29,6 +31,9 @@ namespace KSCApp.ViewModels
 
         [DisplayFormat(DataFormatString = "{0:hh\\:mm tt}")]
         public DateTime MatchStart { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh\\:mm tt}")]
+        public DateTime MatchStartDateTime { get; set; }
 
         public int? LeagueId { get; set; }
     }

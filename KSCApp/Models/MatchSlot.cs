@@ -16,7 +16,7 @@ namespace KSCApp.Models
 
         public int MatchSlotId { get; set; }
 
-        [Display(Name ="Booking Slot")]
+        [Display(Name ="Booking Slot"), DisplayFormat(ApplyFormatInEditMode =true, DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}")]
         public DateTime BookingSlot { get; set; }
 
         [Display(Name = "Slot Minutes")]

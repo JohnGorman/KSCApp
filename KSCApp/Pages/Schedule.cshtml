@@ -23,7 +23,7 @@
                 <div class="form-group col-lg-1 TeamPlayerSelect"></div>
                 <div class="form-group col-lg-4 TeamPlayerSelect">
                     <label class="control-label">Select Date</label>
-                    <input asp-for="@Model.SSVM.SelectedDate" class="form-control" style="padding-bottom: 5px;" onchange="this.form.submit()" />
+                    <input asp-for="@Model.SSVM.SelectedDate" class="form-control" onchange="this.form.submit()" />
                 </div>
             </form>
         </div>
@@ -31,6 +31,7 @@
 </div>
 
 <div class="topdiv">
+    <hr/>
     @foreach (var item in Model.ScheduleList)
     {
         <div class="well col-lg-6 col-lg-offset-3">
@@ -43,19 +44,20 @@
             <p>
                 @Html.DisplayFor(modelItem => item.MatchStart)
             </p>
-            <a asp-page="Members/MatchScore" asp-route-id="@item.MatchSlotId">Enter Result</a> |
+            <a asp-page="Members/MatchScore" asp-route-id="@item.MatchId">Enter Result</a> |
             <a asp-page="Members/Reschedule" asp-route-id="@item.MatchSlotId">Postpone</a>
         </div>
     }
 </div>
 
-<div class="availableSlots">
+@*<div class="availableSlots">
     <br />
-    <h4>Available Slots</h4>
-</div>
+
+</div>*@
 
 <div class="topdiv">
-
+    <h4>Available Slots</h4>
+    <hr/>
     @foreach (var item in Model.AvailableSlots)
     {
         <div class="well col-lg-3">

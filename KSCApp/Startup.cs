@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using KSCApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using KSCApp.Models;
 
 namespace KSCApp
 {

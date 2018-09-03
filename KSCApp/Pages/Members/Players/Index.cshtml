@@ -1,0 +1,75 @@
+﻿@page
+@model KSCApp.Pages.Members.Players.IndexModel
+
+@{
+    ViewData["Title"] = "Players";
+}
+
+<h2>Player List</h2>
+<hr/>
+
+<div class="col-lg-6 col-lg-offset-3">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                        @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerName)
+                    </a>
+                </th>
+                <th>
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.RankSort">
+                        @Html.DisplayNameFor(model => model.lplayerVM[0].Rank)
+                    </a>
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.lplayerVM[0].PlayingLeague)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerType)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.lplayerVM[0].ContactNo)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.lplayerVM[0].Email)
+                    </th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.lplayerVM)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlayerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rank)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.PlayerStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlayingLeague)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlayerType)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContactNo)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>*@
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -9,6 +9,7 @@ using KSCApp.Models;
 using KSCApp.ViewModels;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace KSCApp.Pages
 {
@@ -16,22 +17,27 @@ namespace KSCApp.Pages
     {
         public IActionResult OnGet()
         {
-            ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueName");
+            //Get a list of active leagues for the drop down league selector
+            ViewData["LeagueId"] = new SelectList(_context.League.Where(l=>l.Active==true), "LeagueId", "LeagueName");
 
+            //Check for a session cookie selected league
             string tempLeagueString = HttpContext.Session.GetString("SelectedLeague");
 
             int CurrentLeagueId = 0;
 
+            //If there is a previously selected league in this session load this one
             if (tempLeagueString != null)
             {
                 CurrentLeagueId = Convert.ToInt32(tempLeagueString);
-                SelectedLeague = _context.League.FirstOrDefault(l => l.LeagueId == CurrentLeagueId);
+                SelectedLeague = _context.League.FirstOrDefault(l => l.LeagueId == CurrentLeagueId && l.Active == true);
             }
 
+            //If no session selected league, select the latest league as default
             if (SelectedLeague == null)
-                SelectedLeague = _context.League.OrderByDescending(l => l.LeagueId).First();
+                SelectedLeague = _context.League.OrderByDescending(l => l.LeagueId).FirstOrDefault(l=>l.Active == true);
 
             CurrentLeagueId = SelectedLeague.LeagueId;
+
 
             LeagueTableA = (from Team in _context.Team
                          join TeamPlayer in _context.TeamPlayer on Team.TeamId equals TeamPlayer.TeamId into tvm

@@ -1,0 +1,142 @@
+﻿@page
+@model KSCApp.Pages.Members.Players.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="topdiv">
+    <h4>Player</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerVM.PlayerName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlayerVM.PlayerName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerVM.Rank)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlayerVM.Rank)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerVM.PlayerStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlayerVM.PlayerStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerVM.PlayingLeague)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlayerVM.PlayingLeague)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerVM.PlayerType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlayerVM.PlayerType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerVM.ContactNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlayerVM.ContactNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerVM.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlayerVM.Email)
+        </dd>
+    </dl>
+</div>
+
+<div class="topdiv">
+    <h4>Results</h4>
+    <hr />
+    @foreach (var item in Model.ResultList)
+    {
+        <div class="well col-lg-4">
+            <p>
+                @item.FixtureDetails
+            </p>
+            <p>
+                @item.MatchDetails
+            </p>
+            <p>
+                @item.GameResults : @item.DatePlayed
+            </p>
+
+        </div>
+    }
+</div>
+
+<div class="topdiv">
+    <h4>Scheduled Matches</h4>
+    <hr />
+    @foreach (var item in Model.ScheduleList)
+    {
+        <div class="well col-lg-4">
+            <p>
+                    @Html.DisplayFor(modelItem => item.FixtureDetails)
+            </p>
+            <p>
+                @Html.DisplayFor(modelItem => item.MatchDetails)
+            </p>
+            <p>
+                @Html.DisplayFor(modelItem => item.MatchStartDateTime)
+            </p>
+            <a asp-page="../MatchScore" asp-route-id="@item.MatchId">Enter Result</a> |
+            <a asp-page="../Reschedule" asp-route-id="@item.MatchSlotId">Postpone</a>
+        </div>
+    }
+</div>
+
+<div class="topdiv">
+    <h4>Cancelled Matches</h4>
+    <hr />
+    @foreach (var item in Model.CancelledMatches)
+    {
+        <div class="well col-lg-4">
+            <p>
+                @Html.DisplayFor(modelItem => item.Fixture.League.LeagueName)
+            </p>
+            <p>
+                (L @item.Level) @item.PlayerA.PlayerName v @item.PlayerB.PlayerName
+            </p>
+
+            <a asp-page="./MatchScore" asp-route-id="@item.MatchId">Enter Result</a> |
+            <a asp-page="./MatchToSlot" asp-route-id="@item.MatchId">Re-Schedule</a>
+        </div>
+    }
+</div>
+
+
+<div class="topdiv">
+    <h4>Over Due Matches</h4>
+    <hr />
+    @foreach (var item in Model.OverDueMatches)
+    {
+        <div class="well col-lg-4">
+            <p>
+                @Html.DisplayFor(modelItem => item.Match.Fixture.League.LeagueName)
+            </p>
+            <p>
+                (L @item.Match.Level) @item.Match.PlayerA.PlayerName v @item.Match.PlayerB.PlayerName
+            </p>
+            <p>Originally Planned @item.BookingSlot.ToShortDateString() </p>
+
+            <a asp-page="./MatchScore" asp-route-id="@item.Match.MatchId">Enter Result</a> |
+            <a asp-page="./MatchToSlot" asp-route-id="@item.Match.MatchId">Re-Schedule</a>
+        </div>
+    }
+</div>
+
+<div>
+    <a asp-page="./Index">Go to full Player List</a>
+</div>

@@ -29,8 +29,22 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
-    <Folder Include="Pages\Admin\KSCAppUsers\" />
     <Folder Include="wwwroot\lib\footable\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\Admin\KSCAppUsers\Create.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Pages\Admin\KSCAppUsers\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Pages\Members\Players\Details.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Pages\Members\Players\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>
