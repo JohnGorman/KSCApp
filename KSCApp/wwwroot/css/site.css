@@ -186,7 +186,6 @@ formbackground {
     display: block;
     float: right;
     padding-left:5px;
-
 }
 
 .HomeTitle {
@@ -215,10 +214,10 @@ table thead {
 
 .topdiv {
     width: 100%;
-    min-height: 120px;
+    /*min-height: 120px;*/
     overflow:hidden;
     position: relative;
-    padding:10px;
+    padding:5px;
 }
 
 
@@ -271,8 +270,8 @@ table thead {
     .LeagueSelect {
         float:left;
         width:100%;
-        margin:5px;
-        padding:0px;
+        /*margin:5px;*/
+        padding:2px;
     }
 
     .TeamPlayerSelect {
@@ -285,7 +284,7 @@ table thead {
 
     .topdiv {
         width: 100%;
-        min-height: 210px;
+        /*min-height: 210px;*/
         position: relative;
     }
 

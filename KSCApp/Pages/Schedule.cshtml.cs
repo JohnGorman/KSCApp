@@ -17,6 +17,8 @@ namespace KSCApp.Pages
     {
         [BindProperty]
         public ScheduleSelectVM SSVM { get; set; }
+        [BindProperty]
+        public League SelectedLeague { get; set; }
 
 
         private readonly KSCApp.Data.ApplicationDbContext _context;
@@ -42,7 +44,7 @@ namespace KSCApp.Pages
 
             SSVM.CurrentLeagueId = 0;
 
-            League SelectedLeague = new League();
+            SelectedLeague = new League();
 
             if (tempLeagueString != null)
             {

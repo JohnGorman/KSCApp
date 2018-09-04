@@ -5,7 +5,7 @@
 }
 <div class="topdiv">
     <div class="HomeTitle">
-        <h2>@Model.SelectedLeague.LeagueName</h2>
+        <h2>League Table</h2>
     </div>
 
     <div class="col-lg-3 LeagueSelect">
@@ -22,11 +22,12 @@
 </div>
 
 <div class="topdiv">
+    <h4>@Model.SelectedLeague.LeagueName</h4>
+    <hr />
     @if (Model.SelectedLeague.LeagueType == Models.LeagueType.Short)
     {
         <h4>Section A</h4>
     }
-    <hr/>
     <table class="table table-condensed">
         <thead>
             <tr>
@@ -80,7 +81,6 @@
     @if (Model.SelectedLeague.LeagueType == Models.LeagueType.Short)
     {
         <h4>Section B</h4>
-        <Hr/>
         <table class="table table-condensed">
             <thead>
                 <tr>

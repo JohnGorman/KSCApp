@@ -7,11 +7,25 @@
     <div class="HomeTitle">
         <h2>@ViewData["Title"]</h2>
     </div>
-    <br />
-
-
 
     <div class="LeagueSelect col-lg-7">
+        <div>
+
+            <form method="post" >
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group col-lg-5 TeamPlayerSelect">
+                    <label class="control-label">Select League</label>
+                    <select asp-for="@Model.SSVM.CurrentLeagueId" class="form-control glyphicon-align-center" asp-items="ViewBag.LeagueId" onchange="this.form.submit()"></select>
+                </div>
+                @*<div class="form-group col-lg-1 TeamPlayerSelect"></div>*@
+                <div class="form-group col-lg-5 TeamPlayerSelect">
+                    <label class="control-label">Select Date</label>
+                    <input asp-for="@Model.SSVM.SelectedDate" class="form-control" onchange="this.form.submit()" />
+                </div>
+            </form>
+        </div>
+    </div>
+    @*<div class="LeagueSelect col-lg-7">
         <div class="form-horizontal">
 
             <form method="post" class="form-horizontal">
@@ -27,11 +41,12 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div>*@
 </div>
 
 <div class="topdiv">
-    <hr/>
+    <h4>@Model.SelectedLeague.LeagueName</h4>
+    <hr />
     @foreach (var item in Model.ScheduleList)
     {
         <div class="well col-lg-6 col-lg-offset-3">

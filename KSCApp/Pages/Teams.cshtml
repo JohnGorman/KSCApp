@@ -5,70 +5,79 @@
 }
 
 <h2>@Model.LeagueDetails</h2>
-<h4>@Model.TeamDetails.</h4>
 
+<div class="topdiv">
+    <h4>@Model.TeamDetails.</h4>
+    <hr />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Team[0].Level)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Team[0].Player.PlayerName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Team[0].MatchesPlayed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Team[0].MatchesWon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Team[0].GamesWon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Team[0].GamesLost)
-            </th>
-
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Team)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Level)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Player.PlayerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MatchesPlayed)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MatchesWon)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GamesWon)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GamesLost)
-                </td>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Team[0].Level)*@
+                    Lvl
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Team[0].Player.PlayerName)
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Team[0].MatchesPlayed)*@
+                    Played
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Team[0].MatchesWon)*@
+                    Won
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Team[0].GamesWon)*@
+                    GW
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Team[0].GamesLost)*@
+                    GL
+                </th>
 
 
-                <td>
-                    @*<a asp-page="./Edit" asp-route-id="@item.TeamPlayerId">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.TeamPlayerId">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.TeamPlayerId">Delete</a>*@
-                </td>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Team)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Level)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Player.PlayerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MatchesPlayed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MatchesWon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GamesWon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GamesLost)
+                    </td>
 
-<div>
-    <br />
-    <a asp-page="./Index">Back to League Table</a>
+
+                    <td>
+                        @*<a asp-page="./Edit" asp-route-id="@item.TeamPlayerId">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.TeamPlayerId">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.TeamPlayerId">Delete</a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>Lvl - Level, GW - Games Won, GL - Games Lost</p>
+
+    <div>
+        <br />
+        <a asp-page="./Index">Back to League Table</a>
+    </div>
 </div>
