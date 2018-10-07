@@ -29,7 +29,10 @@
     {
         <div class="well col-lg-6 col-lg-offset-3">
             <p>
-                @Html.DisplayFor(modelItem => item.PlayDate) Team No.@item.TeamA.TeamNo @item.TeamA.TeamName v Team No.@item.TeamB.TeamNo @item.TeamB.TeamName
+                @Html.DisplayFor(modelItem => item.PlayDate)
+            </p>
+            <p>
+                Team @item.TeamA.TeamNo: @item.TeamA.TeamName v Team @item.TeamB.TeamNo: @item.TeamB.TeamName
             </p>
 
         </div>

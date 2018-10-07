@@ -92,7 +92,7 @@ namespace KSCApp.Pages.Members.Players
 
 
             //List of all Matches where MatchId NOT in list a
-            CancelledMatches = _context.Match.Where(m1 => !a.Any(m2 => m2.id == m1.MatchId) && m1.Played == false && (m1.PlayerAId == id || m1.PlayerBId == id))
+            CancelledMatches = _context.Match.Where(m1 => !a.Any(m2 => m2.id == m1.MatchId) && m1.Played == false && (m1.PlayerAId == id || m1.PlayerBId == id) && m1.Fixture.League.Active == true)
                 .Include(m => m.PlayerA)
                 .Include(m => m.PlayerB)
                 .Include(m => m.Fixture.League);
@@ -106,7 +106,7 @@ namespace KSCApp.Pages.Members.Players
                 .Where(m => m.Match.PlayerAId == id || m.Match.PlayerBId == id).ToListAsync();
 
             //List of all Results for this Player
-            ResultList = await _context.Match.Where(m => m.PlayedDate != null && (m.PlayerAId == id || m.PlayerBId == id))
+            ResultList = await _context.Match.Where(m => m.PlayedDate != null && (m.PlayerAId == id || m.PlayerBId == id) && m.Fixture.League.Active == true)
                     .Include(m => m.Fixture)
                     .Include(m => m.Fixture.TeamA)
                     .Include(m => m.Fixture.TeamB)

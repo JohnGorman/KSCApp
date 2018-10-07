@@ -36,6 +36,11 @@ namespace KSCApp.Pages
             if (SelectedLeague == null)
                 SelectedLeague = _context.League.OrderByDescending(l => l.LeagueId).FirstOrDefault(l=>l.Active == true);
 
+
+            if (SelectedLeague == null)
+                return Page();
+
+
             CurrentLeagueId = SelectedLeague.LeagueId;
 
 

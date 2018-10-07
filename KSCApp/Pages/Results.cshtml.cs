@@ -52,6 +52,7 @@ namespace KSCApp.Pages
                 .Include(m => m.PlayerA)
                 .Include(m => m.PlayerB)
                 .Include(m => m.GameResults)
+                .OrderByDescending(m=> m.PlayedDate)
                 .Select(u => new MatchResultVM
                 {
                     FixtureDetails = u.Fixture.TeamA.TeamName + " v " + u.Fixture.TeamB.TeamName,
@@ -60,7 +61,6 @@ namespace KSCApp.Pages
                     MatchId = u.MatchId,
                     DatePlayed = (u.PlayedDate ?? DateTime.Now).ToString("dd/MM/yyy")
                 })
-                .OrderByDescending(u=>u.DatePlayed)
                 .AsNoTracking()
                 .ToListAsync();
 

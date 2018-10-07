@@ -22,7 +22,10 @@
 </div>
 
 <div class="topdiv">
-    <h4>@Model.SelectedLeague.LeagueName</h4>
+    @if (Model.SelectedLeague != null)
+    {
+        <h4>@Model.SelectedLeague.LeagueName</h4>
+   
     <hr />
     @if (Model.SelectedLeague.LeagueType == Models.LeagueType.Short)
     {
@@ -131,4 +134,5 @@
             </tbody>
         </table>
     }
+}
 </div>

@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using KSCApp.Models;
 
+
 namespace KSCApp
 {
     public class Startup
