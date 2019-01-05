@@ -5,71 +5,74 @@
     ViewData["Title"] = "Players";
 }
 
-<h2>Player List</h2>
-<hr/>
+<div class="topdiv">
+    <div class="HomeTitle">
+        <h2>League Players</h2>
+    </div>
 
-<div class="col-lg-6 col-lg-offset-3">
+    @Html.Partial("_LeagueSelectPartial",@Model.LeagueSelectVM)
+
+</div>
+
+<div class="topdiv">
+    <h4>@Model.LeagueSelectVM.SelectedLeague.LeagueName</h4>
+
+    <hr />
+
     <table class="table">
         <thead>
             <tr>
-                <th>
+                <th>         
                     <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
-                        @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerName)
+                        @Html.DisplayNameFor(model => model.TeamPlayers[0].Player.PlayerName)
+                    </a>
+                </th>
+                <th>            
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.TeamSort">
+                        @Html.DisplayNameFor(model => model.TeamPlayers[0].Team)
+                    </a>
+                </th>
+                <th>                 
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.LevelSort">
+                        @Html.DisplayNameFor(model => model.TeamPlayers[0].Level)
+                    </a>
+                </th>
+                <th>                  
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.PointSort">
+                        @*@Html.DisplayNameFor(model => model.TeamPlayers[0].GamesWon)*@Points
                     </a>
                 </th>
                 <th>
-                    <a asp-page="./Index" asp-route-sortOrder="@Model.RankSort">
-                        @Html.DisplayNameFor(model => model.lplayerVM[0].Rank)
-                    </a>
+                    @Html.DisplayNameFor(model => model.TeamPlayers[0].Player.ContactNo)
                 </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerStatus)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.lplayerVM[0].PlayingLeague)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.lplayerVM[0].PlayerType)
-                    </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.lplayerVM[0].ContactNo)
-                </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.lplayerVM[0].Email)
-                    </th>*@
-                <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.lplayerVM)
+            @foreach (var item in Model.TeamPlayers)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PlayerName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Rank)
-                    </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.PlayerStatus)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PlayingLeague)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PlayerType)
-                        </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ContactNo)
-                    </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>*@
-                    <td>
-                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Player.PlayerId">@Html.DisplayFor(modelItem => item.Player.PlayerName)</a>                 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team.TeamNo)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GamesWon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.ContactNo)
+                </td>
+            </tr>
             }
         </tbody>
     </table>
+
+
 </div>
+
+

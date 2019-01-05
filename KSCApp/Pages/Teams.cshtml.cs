@@ -9,12 +9,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KSCApp.Data;
 using KSCApp.Models;
+using KSCApp.Services;
 
 
 namespace KSCApp.Pages
 {
     public class TeamsModel : PageModel
     {
+        //private readonly ITeamPlayerService _teamPlayerService;
+
+        private readonly ApplicationDbContext _context;
+
+        public TeamsModel(ApplicationDbContext context)
+        {
+            _context = context;
+            //_teamPlayerService = teamPlayerService;
+        }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -32,10 +43,11 @@ namespace KSCApp.Pages
 
             LeagueDetails = SelectedLeague.LeagueName;
 
+            //Team = await _teamPlayerService.GetTeamPlayersForTeamAsync(id);
 
             Team = await _context.TeamPlayer.Where(tp => tp.TeamId == id)
-                                            .Include(p=>p.Player)
-                                            .OrderBy(t=>t.Level)
+                                            .Include(p => p.Player)
+                                            .OrderBy(t => t.Level)
                                             .ToListAsync();
 
 
@@ -54,13 +66,7 @@ namespace KSCApp.Pages
         public string TeamDetails { get; set; }
         public string LeagueDetails { get; set; }
 
-        private readonly KSCApp.Data.ApplicationDbContext _context;
 
-
-        public TeamsModel(KSCApp.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
 
 
     }

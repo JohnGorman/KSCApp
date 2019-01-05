@@ -1,0 +1,15 @@
+﻿@using KSCApp.ViewModels
+@model LeagueSelectVM
+
+
+<div class="col-lg-3 LeagueSelect">
+    <div>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Select League</label>
+                @Html.DropDownListFor(x => x.SelectedLeagueId, this.Model.LeagueSelectList, Model.SelectedLeague.LeagueName, htmlAttributes: new { @class = "form-control", onchange = @"form.submit();" })
+            </div>
+        </form>
+    </div>
+</div>

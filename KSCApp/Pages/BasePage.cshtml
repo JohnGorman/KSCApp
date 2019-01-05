@@ -1,0 +1,14 @@
+﻿@page
+@model BasePageModel
+
+@{
+    ViewData["Title"] = "Killala Squash Club";
+}
+<div class="topdiv">
+    <div class="HomeTitle">
+        <h2>League Table</h2>
+    </div>
+
+    @await Component.InvokeAsync("LeagueSelect")
+
+</div>

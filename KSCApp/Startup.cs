@@ -13,7 +13,7 @@ using KSCApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using KSCApp.Models;
-
+using KSCApp.Services;
 
 namespace KSCApp
 {
@@ -42,6 +42,9 @@ namespace KSCApp
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            //Data Services
+            services.AddScoped<ITeamPlayerService, TeamPlayerService>();
 
             services.AddIdentity<IdentityUser, IdentityRole>()
             .AddDefaultUI()

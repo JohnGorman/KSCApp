@@ -8,60 +8,77 @@ using Microsoft.EntityFrameworkCore;
 using KSCApp.Data;
 using KSCApp.Models;
 using KSCApp.ViewModels;
+using KSCApp.Services;
 
 namespace KSCApp.Pages.Members.Players
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
-        private readonly KSCApp.Data.ApplicationDbContext _context;
+        private readonly ITeamPlayerService _teamPlayerService;
 
-        public IndexModel(KSCApp.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public IList<PlayerVM> lplayerVM { get; set; }
+        public IList<TeamPlayer> TeamPlayers { get; set; }
+        public IQueryable<TeamPlayer> TeamPlayersIQ { get; set; }
 
         public string NameSort { get; set; }
-        public string RankSort { get; set; }
+        public string PointSort { get; set; }
+        public string TeamSort { get; set; }
+        public string LevelSort { get; set; }
+
+        public IndexModel(ApplicationDbContext context, ITeamPlayerService teamPlayerService) : base(context)
+        {
+            _teamPlayerService = teamPlayerService;
+        }
+
 
         public async Task OnGetAsync(string sortOrder)
         {
+
+
+        SetCurrentLeague();
+
             NameSort = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
-            RankSort = sortOrder == "Rank" ? "Rank_desc" : "Rank";
 
-            IQueryable<PlayerVM> lplayerVMIQ = (from player in _context.Player join user in _context.Users on player.UserId equals user.Id into pvm from con in pvm.DefaultIfEmpty() select new PlayerVM
-            {
-                Id = player.PlayerId,
-                PlayerName = player.PlayerName,
-                PlayerStatus = player.PlayerStatus,
-                PlayingLeague = player.PlayingLeague,
-                ProfilePicture = player.ProfilePicture,
-                ContactNo = player.ContactNo,
-                PlayerType = player.PlayerType,
-                Rank = player.Rank,
-                Email = con.Email
-            });
+            PointSort = sortOrder == "Points_desc" ? "Points" : "Points_desc";
 
+            TeamSort = sortOrder == "Team" ? "Team_desc" : "Team";
+
+            LevelSort = sortOrder == "Level" ? "Level_desc" : "Level";
+
+
+            TeamPlayers = await _teamPlayerService.GetTeamPlayersForLeagueAsync(LeagueSelectVM.SelectedLeague.LeagueId);
+
+            TeamPlayersIQ = TeamPlayers.AsQueryable();
 
             switch (sortOrder)
             {
-                case "Name_desc":
-                    lplayerVMIQ = lplayerVMIQ.OrderByDescending(p => p.PlayerName);
+                case "Name_desc":                   
+                    TeamPlayersIQ = TeamPlayersIQ.OrderByDescending(tp => tp.Player.PlayerName);
                     break;
-                case "Rank":
-                    lplayerVMIQ = lplayerVMIQ.OrderBy(p => p.Rank);
+                case "Points":
+                    TeamPlayersIQ = TeamPlayersIQ.OrderBy(tp => tp.GamesWon);
                     break;
-                case "Rank_desc":
-                    lplayerVMIQ = lplayerVMIQ.OrderByDescending(p => p.Rank);
+                case "Points_desc":
+                    TeamPlayersIQ = TeamPlayersIQ.OrderByDescending(tp => tp.GamesWon);
+                    break;
+                case "Team":
+                    TeamPlayersIQ = TeamPlayersIQ.OrderBy(tp => tp.Team.TeamNo);
+                    break;
+                case "Team_desc":
+                    TeamPlayersIQ = TeamPlayersIQ.OrderByDescending(tp => tp.Team.TeamNo);
+                    break;
+                case "Level":
+                    TeamPlayersIQ = TeamPlayersIQ.OrderBy(tp => tp.Level).ThenByDescending(tp=>tp.GamesWon);
+                    break;
+                case "Level_desc":
+                    TeamPlayersIQ = TeamPlayersIQ.OrderByDescending(tp => tp.Level);
                     break;
                 default:
-                    lplayerVMIQ = lplayerVMIQ.OrderBy(p => p.PlayerName);
+                    TeamPlayersIQ = TeamPlayersIQ.OrderBy(tp => tp.Player.PlayerName);
                     break;
             }
 
-            lplayerVM = await lplayerVMIQ.AsNoTracking().ToListAsync();
+            TeamPlayers = TeamPlayersIQ.AsNoTracking().ToList();
 
         }
-    }
+}
 }
