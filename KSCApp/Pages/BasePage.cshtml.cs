@@ -57,7 +57,19 @@ namespace KSCApp.Pages
                 LeagueSelectVM.SelectedLeagueId = HttpContext.Session.GetString("SelectedLeague");
                 LeagueSelectVM.SelectedLeague = _context.League.FirstOrDefault(l => l.LeagueId == Convert.ToInt32(LeagueSelectVM.SelectedLeagueId));
             }
+        }
 
+        public void SetSelectedDate()
+        {
+            //Check for a session cookie selected date
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("SelectedDate")))
+            {
+                LeagueSelectVM.SelectedDate = DateTime.Today;
+            }
+            else
+            {
+                LeagueSelectVM.SelectedDate = Convert.ToDateTime(HttpContext.Session.GetString("SelectedDate")).Date;
+            }
         }
 
         //public virtual async Task OnGetAsync()
@@ -77,6 +89,7 @@ namespace KSCApp.Pages
             }
 
             HttpContext.Session.SetString("SelectedLeague", LeagueSelectVM.SelectedLeagueId);
+            HttpContext.Session.SetString("SelectedDate", LeagueSelectVM.SelectedDate.ToShortDateString());
 
             return RedirectToPage(LeagueSelectVM.RedirectPage);
         }

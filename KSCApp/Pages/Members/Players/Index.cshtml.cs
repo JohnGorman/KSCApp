@@ -16,14 +16,17 @@ namespace KSCApp.Pages.Members.Players
     {
         private readonly ITeamPlayerService _teamPlayerService;
 
+        //An IList to retrieve List and an IQueryable to handle sorting
         public IList<TeamPlayer> TeamPlayers { get; set; }
         public IQueryable<TeamPlayer> TeamPlayersIQ { get; set; }
 
+        //Accommodate sort parameters from .cshtml file
         public string NameSort { get; set; }
         public string PointSort { get; set; }
         public string TeamSort { get; set; }
         public string LevelSort { get; set; }
 
+        //Constructor using Dependancy Injection
         public IndexModel(ApplicationDbContext context, ITeamPlayerService teamPlayerService) : base(context)
         {
             _teamPlayerService = teamPlayerService;
@@ -33,8 +36,8 @@ namespace KSCApp.Pages.Members.Players
         public async Task OnGetAsync(string sortOrder)
         {
 
+            SetCurrentLeague();  //Calls BasePageModel to setup current league in base LeagueSelectVM
 
-        SetCurrentLeague();
 
             NameSort = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
 
@@ -61,7 +64,7 @@ namespace KSCApp.Pages.Members.Players
                     TeamPlayersIQ = TeamPlayersIQ.OrderByDescending(tp => tp.GamesWon);
                     break;
                 case "Team":
-                    TeamPlayersIQ = TeamPlayersIQ.OrderBy(tp => tp.Team.TeamNo);
+                    TeamPlayersIQ = TeamPlayersIQ.OrderBy(tp => tp.Team.TeamNo).ThenBy(tp=>tp.Level);
                     break;
                 case "Team_desc":
                     TeamPlayersIQ = TeamPlayersIQ.OrderByDescending(tp => tp.Team.TeamNo);

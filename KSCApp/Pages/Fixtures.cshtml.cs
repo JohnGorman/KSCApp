@@ -13,62 +13,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KSCApp.Pages
 {
-    public class FixtureModel : PageModel
+    public class FixtureModel : BasePageModel
     {
-
-        [BindProperty]
-        public League SelectedLeague { get; set; }
-
-
-        private readonly KSCApp.Data.ApplicationDbContext _context;
-
-        public FixtureModel(KSCApp.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
         public IList<Fixture> Fixture { get; set; }
 
+        public FixtureModel(KSCApp.Data.ApplicationDbContext context) : base(context)
+        {
+        }
 
         public async Task OnGetAsync()
         {
-            ViewData["LeagueId"] = new SelectList(_context.League.Where(l=>l.Active == true), "LeagueId", "LeagueName");
+            SetCurrentLeague();
 
-            string tempLeagueString = HttpContext.Session.GetString("SelectedLeague");
-
-            int CurrentLeagueId = 0;
-
-            if (tempLeagueString != null)
-            {
-                CurrentLeagueId = Convert.ToInt32(tempLeagueString);
-                SelectedLeague = _context.League.FirstOrDefault(l => l.LeagueId == CurrentLeagueId && l.Active == true);
-            }
-
-            if (SelectedLeague == null)
-                SelectedLeague = _context.League.OrderByDescending(l => l.LeagueId).FirstOrDefault(l=>l.Active == true);
-
-            CurrentLeagueId = SelectedLeague.LeagueId;
-
-            Fixture = await _context.Fixture.Where(f => f.LeagueId == CurrentLeagueId)
+            Fixture = await _context.Fixture.Where(f => f.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId)
                 .Include(f => f.League)
                 .Include(f => f.TeamA)
                 .Include(f => f.TeamB)
                 .OrderBy(f=>f.PlayDate)
                 .ToListAsync();
 
-        }
-
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-
-            HttpContext.Session.SetString("SelectedLeague", SelectedLeague.LeagueId.ToString());
-
-            return RedirectToPage("./Fixtures");
         }
     }
 }

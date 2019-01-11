@@ -13,68 +13,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KSCApp.Pages
 {
-    public class ScheduleModel : PageModel
+    public class ScheduleModel : BasePageModel
     {
-        [BindProperty]
-        public ScheduleSelectVM SSVM { get; set; }
-        [BindProperty]
-        public League SelectedLeague { get; set; }
-
-
-        private readonly KSCApp.Data.ApplicationDbContext _context;
-
-        public ScheduleModel(KSCApp.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
         public IList<ScheduleVM> ScheduleList { get; set; }
-        public List<DateTime> DateList;
         public List<MatchSlot> AvailableSlots;
 
+        public ScheduleModel(KSCApp.Data.ApplicationDbContext context) : base(context)
+        {
+        }
 
         public async Task OnGetAsync()
         {
-            ViewData["LeagueId"] = new SelectList(_context.League.Where(l=>l.Active == true), "LeagueId", "LeagueName");
+            SetCurrentLeague();
 
-            string tempLeagueString = HttpContext.Session.GetString("SelectedLeague");
-            string tempSelectDateString = HttpContext.Session.GetString("SelectedDate");
+            SetSelectedDate();
 
-            SSVM = new ScheduleSelectVM();
-
-            SSVM.CurrentLeagueId = 0;
-
-            SelectedLeague = new League();
-
-            if (tempLeagueString != null)
-            {
-                SSVM.CurrentLeagueId = Convert.ToInt32(tempLeagueString);
-                SelectedLeague = _context.League.FirstOrDefault(l => l.LeagueId == SSVM.CurrentLeagueId);
-            }
-
-            if (SelectedLeague.LeagueId<1)
-                SelectedLeague = _context.League.OrderByDescending(l => l.LeagueId).FirstOrDefault(l=>l.Active==true);
-
-            SSVM.CurrentLeagueId = SelectedLeague.LeagueId;
-
-
-            DateTime Today = DateTime.Today;
-
-            DateList = new List<DateTime>();
-
-            DateList = _context.MatchSlot.Where(ms => ms.BookingSlot.Date >= Today)
+            var DateList = _context.MatchSlot.Where(ms => ms.BookingSlot.Date >= DateTime.Today)
                 .Select(ms => ms.BookingSlot).ToList();
 
-
-            DateTime compareDate = DateList.Where(d => d.Date == Convert.ToDateTime(tempSelectDateString).Date).FirstOrDefault();
-
-
-            if (compareDate < Today)
-                compareDate = Today;
-
-            SSVM.SelectedDate = compareDate;
-
-            ScheduleList = await _context.MatchSlot.Where(ms => ms.BookingSlot.Date == compareDate.Date && ms.Match.Played != true)
+            ScheduleList = await _context.MatchSlot.Where(ms => ms.BookingSlot.Date == LeagueSelectVM.SelectedDate.Date && ms.Match.Played != true)
                 .Include(ms => ms.Match)
                 .Include(ms => ms.Match.Fixture)
                 .Include(ms => ms.Match.Fixture.League)
@@ -92,32 +49,15 @@ namespace KSCApp.Pages
                     MatchStart = ms.BookingSlot,
                     LeagueId = ms.Match.Fixture.LeagueId
                 })
-                .OrderBy(s => s.MatchStart).Where(m => m.LeagueId == SSVM.CurrentLeagueId)
+                .OrderBy(s => s.MatchStart).Where(m => m.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId)
                 .AsNoTracking()
                 .ToListAsync();
 
-            AvailableSlots = await _context.MatchSlot.Where(ms => ms.BookingSlot.Date == compareDate.Date && ms.MatchId == null && ms.BookingSlot.ToUniversalTime() > DateTime.Now.ToUniversalTime())
+            AvailableSlots = await _context.MatchSlot.Where(ms => ms.BookingSlot.Date == LeagueSelectVM.SelectedDate.Date.Date && ms.MatchId == null && ms.BookingSlot.ToUniversalTime() > DateTime.Now.ToUniversalTime())
                 .OrderBy(ms=>ms.BookingSlot)
                 .AsNoTracking().
                 ToListAsync();
 
-        }
-
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToPage("./Schedule");
-            }
-
-            if (SSVM.CurrentLeagueId!=null)
-                HttpContext.Session.SetString("SelectedLeague", SSVM.CurrentLeagueId.ToString());
-
-
-            if (SSVM.SelectedDate != null)
-                HttpContext.Session.SetString("SelectedDate", SSVM.SelectedDate.ToShortDateString());
-
-            return RedirectToPage("./Schedule");
         }
     }
 }

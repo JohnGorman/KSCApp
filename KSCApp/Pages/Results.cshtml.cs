@@ -13,39 +13,19 @@ using KSCApp.ViewModels;
 
 namespace KSCApp.Pages
 {
-    public class ResultsModel : PageModel
+    public class ResultsModel : BasePageModel
     {
-        private readonly KSCApp.Data.ApplicationDbContext _context;
-
-        public ResultsModel(KSCApp.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
         public IList<MatchResultVM> ResultList { get; set; }
 
-        [BindProperty]
-        public League SelectedLeague { get; set; }
+        public ResultsModel(KSCApp.Data.ApplicationDbContext context) : base(context)
+        {
+        }
 
         public async Task OnGetAsync()
         {
-            ViewData["LeagueId"] = new SelectList(_context.League.Where(l=>l.Active==true), "LeagueId", "LeagueName");
+            SetCurrentLeague();
 
-            string tempLeagueString = HttpContext.Session.GetString("SelectedLeague");
-
-            int CurrentLeagueId = 0;
-
-
-            if (tempLeagueString != null)
-            {
-                CurrentLeagueId = Convert.ToInt32(tempLeagueString);
-                SelectedLeague = _context.League.FirstOrDefault(l => l.LeagueId == CurrentLeagueId && l.Active == true);
-            }
-
-            if (SelectedLeague == null)
-                SelectedLeague = _context.League.OrderByDescending(l => l.LeagueId).FirstOrDefault(l => l.Active == true);
-
-            ResultList = await _context.Match.Where(m => m.PlayedDate != null && m.Fixture.LeagueId == SelectedLeague.LeagueId)
+            ResultList = await _context.Match.Where(m => m.PlayedDate != null && m.Fixture.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId)
                 .Include(m => m.Fixture)
                 .Include(m => m.Fixture.TeamA)
                 .Include(m => m.Fixture.TeamB)
@@ -64,6 +44,7 @@ namespace KSCApp.Pages
                 .AsNoTracking()
                 .ToListAsync();
 
+
             foreach (var res in ResultList)
             {
                 string gameResults = "(";
@@ -78,17 +59,5 @@ namespace KSCApp.Pages
             }
         }
 
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-
-            HttpContext.Session.SetString("SelectedLeague", SelectedLeague.LeagueId.ToString());
-
-            return RedirectToPage("./Results");
-        }
     }
 }
