@@ -18,6 +18,5 @@ namespace KSCApp.ViewModels
         [DataType(DataType.Date), Display(Name = "Select Date"), Required]
         public DateTime SelectedDate { get; set; }
 
-        public string RedirectPage { get; set; }
     }
 }

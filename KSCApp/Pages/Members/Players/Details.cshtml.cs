@@ -11,21 +11,18 @@ using KSCApp.ViewModels;
 
 namespace KSCApp.Pages.Members.Players
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel : BasePageModel
     {
-        private readonly KSCApp.Data.ApplicationDbContext _context;
-
-        public DetailsModel(KSCApp.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
         public PlayerVM PlayerVM { get; set; }
         public IList<ScheduleVM> ScheduleList { get; set; }
         public List<DateTime> DateList;
         public List<MatchSlot> OverDueMatches;
         public IQueryable<Match> CancelledMatches;
         public IList<MatchResultVM> ResultList { get; set; }
+
+        public DetailsModel(KSCApp.Data.ApplicationDbContext context) : base(context)
+        {
+        }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -34,26 +31,23 @@ namespace KSCApp.Pages.Members.Players
                 return NotFound();
             }
 
-            //Player = await _context.Player
-            //    .Include(p=>p.KSCAppUser)
-            //    .FirstOrDefaultAsync(m => m.PlayerId == id);
+            SetCurrentLeague();     
 
             PlayerVM = await (from player in _context.Player
-                                                join user in _context.Users on player.UserId equals user.Id into pvm
-                                                from con in pvm.DefaultIfEmpty()
-                                                select new PlayerVM
-                                                {
-                                                    Id = player.PlayerId,
-                                                    PlayerName = player.PlayerName,
-                                                    PlayerStatus = player.PlayerStatus,
-                                                    PlayingLeague = player.PlayingLeague,
-                                                    ProfilePicture = player.ProfilePicture,
-                                                    ContactNo = player.ContactNo,
-                                                    PlayerType = player.PlayerType,
-                                                    Rank = player.Rank,
-                                                    Email = con.Email
-                                                })
-                                                .FirstOrDefaultAsync(m => m.Id == id); ;
+                              join user in _context.Users on player.UserId equals user.Id into pvm
+                              from con in pvm.DefaultIfEmpty()
+                              select new PlayerVM
+                              {
+                                  Id = player.PlayerId,
+                                  PlayerName = player.PlayerName,
+                                  PlayerStatus = player.PlayerStatus,
+                                  PlayingLeague = player.PlayingLeague,
+                                  ProfilePicture = player.ProfilePicture,
+                                  ContactNo = player.ContactNo,
+                                  PlayerType = player.PlayerType,
+                                  Rank = player.Rank,
+                                  Email = con.Email
+                              }).FirstOrDefaultAsync(m => m.Id == id); ;
 
 
             if (PlayerVM == null)
@@ -79,6 +73,7 @@ namespace KSCApp.Pages.Members.Players
                     MatchStartDateTime = ms.BookingSlot,
                     LeagueId = ms.Match.Fixture.LeagueId
                 })
+                .Where(ms=>ms.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId)
                 .OrderBy(s => s.MatchStart)
                 .AsNoTracking()
                 .ToListAsync();
@@ -87,15 +82,18 @@ namespace KSCApp.Pages.Members.Players
             var a = _context.MatchSlot.Where(ms => ms.MatchId != null)
                 .Select(m => new
                 {
-                    id = (int)m.MatchId
-                }).ToList();
+                    id = (int)m.MatchId,
+                    leagueId = m.Match.Fixture.LeagueId
+                }).Where(l=>l.leagueId == LeagueSelectVM.SelectedLeague.LeagueId)
+                .ToList();
 
 
             //List of all Matches where MatchId NOT in list a
             CancelledMatches = _context.Match.Where(m1 => !a.Any(m2 => m2.id == m1.MatchId) && m1.Played == false && (m1.PlayerAId == id || m1.PlayerBId == id) && m1.Fixture.League.Active == true)
                 .Include(m => m.PlayerA)
                 .Include(m => m.PlayerB)
-                .Include(m => m.Fixture.League);
+                .Include(m => m.Fixture.League)
+                .Where(l=>l.Fixture.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId);
 
 
             //List of all Matches that are overdue
@@ -103,10 +101,11 @@ namespace KSCApp.Pages.Members.Players
                 .Include(m => m.Match.PlayerA)
                 .Include(m => m.Match.PlayerB)
                 .Include(m => m.Match.Fixture.League)
-                .Where(m => m.Match.PlayerAId == id || m.Match.PlayerBId == id).ToListAsync();
+                .Where(m => m.Match.PlayerAId == id || m.Match.PlayerBId == id && m.Match.Fixture.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId)
+                .ToListAsync();
 
             //List of all Results for this Player
-            ResultList = await _context.Match.Where(m => m.PlayedDate != null && (m.PlayerAId == id || m.PlayerBId == id) && m.Fixture.League.Active == true)
+            ResultList = await _context.Match.Where(m => m.PlayedDate != null && (m.PlayerAId == id || m.PlayerBId == id) && m.Fixture.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId)
                     .Include(m => m.Fixture)
                     .Include(m => m.Fixture.TeamA)
                     .Include(m => m.Fixture.TeamB)
@@ -140,5 +139,7 @@ namespace KSCApp.Pages.Members.Players
 
             return Page();
         }
+
+
     }
 }

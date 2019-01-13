@@ -47,6 +47,8 @@ namespace KSCApp.Models
         public string UserId { get; set; }
         public virtual KSCAppUser KSCAppUser { get; set; }
 
+
+
         //public ICollection<Match> MatchesPlayerA { get; set; }
         //public ICollection<Match> MatchesPlayerB { get; set; }
         public ICollection<RankHistory> RankHistory { get; set; }

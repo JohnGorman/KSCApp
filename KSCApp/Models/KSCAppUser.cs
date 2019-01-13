@@ -10,7 +10,7 @@ namespace KSCApp.Models
     {
         public KSCAppUser()
         {
-            Players = new HashSet<Player>();
+            //Players = new HashSet<Player>();
         }
 
         public string Name { get; set; }

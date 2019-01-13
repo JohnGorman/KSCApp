@@ -14,37 +14,43 @@ namespace KSCApp.Pages.Members
     {
         private readonly KSCApp.Data.ApplicationDbContext _context;
 
-        public MatchScoreModel(KSCApp.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        [BindProperty]
+        public ResultsVM ResultsVM { get; set; }
 
         [BindProperty]
-        public ResultsVM resultsVM { get; set; }
+        public List<Game> Games { get; set; }
 
         [BindProperty]
         public Match Match { get; set; }
 
+        public MatchScoreModel(KSCApp.Data.ApplicationDbContext context)
+        {
+            _context = context;          
+        }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id!=null)
             {
+                Match = await GetMatch(id);
 
-               Match = await _context.Match
-                    .Include(m=>m.Fixture)
-                    .Include(m=>m.Fixture.League)
-                    .Include(m=>m.PlayerA)
-                    .Include(m=>m.PlayerB)
-                    .FirstOrDefaultAsync(m=>m.MatchId == id);
+                ResultsVM = new ResultsVM() { MatchId = Match.MatchId };
 
-                resultsVM = new ResultsVM() { MatchId = Match.MatchId };
+                this.Games = new List<Game>();
+
+                //Create 5 new games for result entry
+                for (int i = 0; i < 5; i++)
+                {
+                    var game = new Game();
+                    game.GameNo = i + 1;
+                    Games.Add(game);
+                }
+
 
                 if (Match.Played == true)
                 {
                     return RedirectToPage("./Index");
-                }
-                
+                }              
 
             }
             else
@@ -52,8 +58,22 @@ namespace KSCApp.Pages.Members
                 return RedirectToPage("./Index");
             }
 
-
             return Page();
+        }
+
+        public async Task<Match> GetMatch(int? id)
+        {
+            return await _context.Match
+                    .Include(m => m.Fixture)
+                    .Include(m => m.Fixture.League)
+                    .Include(m => m.PlayerA)
+                    .Include(m => m.PlayerB)
+                    .FirstOrDefaultAsync(m => m.MatchId == id);
+        }
+
+        public async Task<TeamPlayer> GetTeamPlayer(int playerId, int teamId)
+        {
+            return await _context.TeamPlayer.FirstOrDefaultAsync(tp => tp.PlayerId == playerId && tp.TeamId == teamId);
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -63,209 +83,74 @@ namespace KSCApp.Pages.Members
                 return Page();
             }
 
-
-            if (resultsVM != null)
+            if (ResultsVM != null)
             {
-                Match = _context.Match
-                     .Include(m => m.Fixture)
-                     .Include(m => m.Fixture.League)
-                     .Include(m => m.PlayerA)
-                     .Include(m => m.PlayerB)
-                     .FirstOrDefault(m => m.MatchId == resultsVM.MatchId);
+                Match = await GetMatch(ResultsVM.MatchId);
 
                 if (Match.Played == true)
                 {
                     return Page();
                 }
 
-
-                var teamPlayerA = _context.TeamPlayer.FirstOrDefault(tp => tp.PlayerId == Match.PlayerAId && tp.TeamId == Match.Fixture.TeamAId);
-
-                var teamPlayerB = _context.TeamPlayer.FirstOrDefault(tp => tp.PlayerId == Match.PlayerBId && tp.TeamId == Match.Fixture.TeamBId);
+                TeamPlayer teamPlayerA = await GetTeamPlayer(Match.PlayerAId, Match.Fixture.TeamAId);
+                TeamPlayer teamPlayerB = await GetTeamPlayer(Match.PlayerBId, Match.Fixture.TeamBId);
 
                 int gamesPlayerA = 0;
 
                 int gamesPlayerB = 0;
 
-                //Make new result for Game 1
-                if (resultsVM.Game1PlayerAScore + resultsVM.Game1PlayerBScore < 1)
-                    return Page();
-                else
+                //Iterate through all 5 games
+                for (int i=0;i<5;i++)
                 {
-                    try
+                    if (Games[i].PlayerAScore + Games[i].PlayerBScore > 0)
                     {
-                        if (resultsVM.Game1PlayerAScore > resultsVM.Game1PlayerBScore)
-                            gamesPlayerA += 1;
+                        if (Games[i].PlayerAScore > Games[i].PlayerBScore)
+                        {
+                            gamesPlayerA++;
+                        }
                         else
-                            gamesPlayerB += 1;
+                        {
+                            gamesPlayerB++;
+                        }
 
                         GameResult gameResult = new GameResult()
                         {
                             MatchId = Match.MatchId,
-                            GameNo = 1,
-                            PlayerApoints = resultsVM.Game1PlayerAScore,
-                            PlayerBpoints = resultsVM.Game1PlayerBScore
+                            GameNo = i+1,
+                            PlayerApoints = Games[i].PlayerAScore,
+                            PlayerBpoints = Games[i].PlayerBScore
                         };
-                        _context.GameResult.Add(gameResult);
-                        _context.SaveChanges();
-                    }
-                    catch
-                    {
-                        throw;
+                        await _context.GameResult.AddAsync(gameResult);
                     }
                 }
-
-                //Make new result for Game 2
-                if (resultsVM.Game2PlayerAScore + resultsVM.Game2PlayerBScore > 0)
-                {
-                    try
-                    {
-                        if (resultsVM.Game2PlayerAScore > resultsVM.Game2PlayerBScore)
-                            gamesPlayerA += 1;
-                        else
-                            gamesPlayerB += 1;
-
-                        GameResult gameResult = new GameResult()
-                        {
-                            MatchId = Match.MatchId,
-                            GameNo = 2,
-                            PlayerApoints = resultsVM.Game2PlayerAScore,
-                            PlayerBpoints = resultsVM.Game2PlayerBScore
-                        };
-                        _context.GameResult.Add(gameResult);
-                        _context.SaveChanges();
-                    }
-                    catch
-                    {
-                        throw;
-                    }
-                }
-
-                //Make new result for Game 3
-                if (resultsVM.Game3PlayerAScore + resultsVM.Game3PlayerBScore > 0)
-                {
-                    try
-                    {
-                        if (resultsVM.Game3PlayerAScore > resultsVM.Game3PlayerBScore)
-                            gamesPlayerA += 1;
-                        else
-                            gamesPlayerB += 1;
-
-                        GameResult gameResult = new GameResult()
-                        {
-                            MatchId = Match.MatchId,
-                            GameNo = 3,
-                            PlayerApoints = resultsVM.Game3PlayerAScore,
-                            PlayerBpoints = resultsVM.Game3PlayerBScore
-                        };
-                        _context.GameResult.Add(gameResult);
-                        _context.SaveChanges();
-                    }
-                    catch
-                    {
-                        throw;
-                    }
-                }
-
-                //Make new result for Game 4
-                if (resultsVM.Game4PlayerAScore + resultsVM.Game4PlayerBScore > 0)
-                {
-                    try
-                    {
-                        if (resultsVM.Game4PlayerAScore > resultsVM.Game4PlayerBScore)
-                            gamesPlayerA += 1;
-                        else
-                            gamesPlayerB += 1;
-
-                        GameResult gameResult = new GameResult()
-                        {
-                            MatchId = Match.MatchId,
-                            GameNo = 4,
-                            PlayerApoints = resultsVM.Game4PlayerAScore,
-                            PlayerBpoints = resultsVM.Game4PlayerBScore
-                        };
-                        _context.GameResult.Add(gameResult);
-                        _context.SaveChanges();
-                    }
-                    catch
-                    {
-                        throw;
-                    }
-                }
-
-                //Make new result for Game 5
-                if (resultsVM.Game5PlayerAScore + resultsVM.Game5PlayerBScore > 0)
-                {
-                    try
-                    {
-                        if (resultsVM.Game5PlayerAScore > resultsVM.Game5PlayerBScore)
-                            gamesPlayerA += 1;
-                        else
-                            gamesPlayerB += 1;
-
-                        GameResult gameResult = new GameResult()
-                        {
-                            MatchId = Match.MatchId,
-                            GameNo = 5,
-                            PlayerApoints = resultsVM.Game5PlayerAScore,
-                            PlayerBpoints = resultsVM.Game5PlayerBScore
-                        };
-                        _context.GameResult.Add(gameResult);
-                        _context.SaveChanges();
-                    }
-                    catch
-                    {
-                        throw;
-                    }
-                }
-
-
-                //Update Teamplayer A with match result
+                
                 try
                 {
+                    //Update Teamplayer A with match result
                     teamPlayerA.GamesWon += gamesPlayerA;
                     teamPlayerA.GamesLost += gamesPlayerB;
                     if (gamesPlayerA > gamesPlayerB)
                         teamPlayerA.MatchesWon += 1;
                     teamPlayerA.MatchesPlayed += 1;
-
                     _context.TeamPlayer.Update(teamPlayerA);
-                    await _context.SaveChangesAsync();
-                }
-                catch
-                {
-                    throw;
-                }
 
-                //Update Teamplayer B with match result
-                try
-                {
+                    //Update Teamplayer B with match result
                     teamPlayerB.GamesWon += gamesPlayerB;
                     teamPlayerB.GamesLost += gamesPlayerA;
                     if (gamesPlayerB > gamesPlayerA)
                         teamPlayerB.MatchesWon += 1;
                     teamPlayerB.MatchesPlayed += 1;
-
                     _context.TeamPlayer.Update(teamPlayerB);
-                    await _context.SaveChangesAsync();
-                }
-                catch
-                {
-                    throw;
-                }
 
-                //Update Match with match result and mark as played
-                try
-                {
+                    //Update Match with match result and mark as played
                     Match.Played = true;
                     Match.PlayedDate = DateTime.Today;
                     Match.PlayerAgames = gamesPlayerA;
                     Match.PlayerBgames = gamesPlayerB;
                     _context.Match.Update(Match);
 
-
                     //If result is for future scheduled match, free up the slot
-                    var matchslot = _context.MatchSlot.Where(ms => ms.MatchId == resultsVM.MatchId && ms.BookingSlot > DateTime.Now)
+                    var matchslot = _context.MatchSlot.Where(ms => ms.MatchId == ResultsVM.MatchId && ms.BookingSlot > DateTime.Now)
                         .FirstOrDefault();
 
                     if (matchslot != null)
@@ -273,7 +158,7 @@ namespace KSCApp.Pages.Members
                         matchslot.MatchId = null;
                         _context.MatchSlot.Update(matchslot);
                     }
-                        
+
                     await _context.SaveChangesAsync();
                 }
                 catch
@@ -285,5 +170,7 @@ namespace KSCApp.Pages.Members
 
             return RedirectToPage("../Index");
         }
+
+       
     }
 }

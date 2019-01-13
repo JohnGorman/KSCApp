@@ -59,5 +59,20 @@ namespace KSCApp.Pages
                 ToListAsync();
 
         }
+
+        public override IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            SetSelectedLeagueSession();
+
+            SetSelectedDateSession();
+
+            return RedirectToPage();
+
+        }
     }
 }

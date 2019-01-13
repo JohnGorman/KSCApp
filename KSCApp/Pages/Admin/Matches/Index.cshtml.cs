@@ -11,20 +11,20 @@ using KSCApp.Models;
 
 namespace KSCApp.Pages.Admin.Matches
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
-        private readonly KSCApp.Data.ApplicationDbContext _context;
 
-        public IndexModel(KSCApp.Data.ApplicationDbContext context)
+        public IndexModel(KSCApp.Data.ApplicationDbContext context) :base(context)
         {
-            _context = context;
         }
 
         public IList<Match> Match { get;set; }
 
         public async Task OnGetAsync()
         {
-            Match = await _context.Match
+            SetCurrentLeague();
+
+            Match = await _context.Match.Where(m=>m.Fixture.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId)
                 .Include(m => m.Fixture)
                 .Include(m => m.PlayerA)
                 .Include(m => m.PlayerB).ToListAsync();

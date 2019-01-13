@@ -6,28 +6,19 @@ using KSCApp.Models;
 
 namespace KSCApp.ViewModels
 {
+    public class Game
+    {
+        public int GameNo { get; set; }
+        public int PlayerAScore { get; set; }
+        public int PlayerBScore { get; set; }
+
+    }
+
     public class ResultsVM
     {
         public int MatchId { get; set; }
+        public int TeamPlayerAId { get; set; }
+        public int TeamPlayerBId { get; set; }
 
-        public int Game1PlayerAScore { get; set; }
-
-        public int Game1PlayerBScore { get; set; }
-
-        public int Game2PlayerAScore { get; set; }
-
-        public int Game2PlayerBScore { get; set; }
-
-        public int Game3PlayerAScore { get; set; }
-
-        public int Game3PlayerBScore { get; set; }
-
-        public int Game4PlayerAScore { get; set; }
-
-        public int Game4PlayerBScore { get; set; }
-
-        public int Game5PlayerAScore { get; set; }
-
-        public int Game5PlayerBScore { get; set; }
     }
 }

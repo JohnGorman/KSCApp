@@ -38,7 +38,7 @@ namespace KSCApp.Pages
 
 
             //Set default return page
-            LeagueSelectVM.RedirectPage = "./Index";
+            //LeagueSelectVM.RedirectPage = "./Index";
         }
 
 
@@ -72,14 +72,17 @@ namespace KSCApp.Pages
             }
         }
 
-        //public virtual async Task OnGetAsync()
-        //{
-        //    SetCurrentLeague();
 
-        //    var model = await _context.Team.FirstOrDefaultAsync(l => l.LeagueId == Convert.ToInt32(LeagueSelectVM.SelectedLeagueId));
+        public void SetSelectedLeagueSession()
+        {
+            HttpContext.Session.SetString("SelectedLeague", LeagueSelectVM.SelectedLeagueId);
+        }
 
-        //    LeagueSelectVM.RedirectPage = "./Index";
-        //}
+        public void SetSelectedDateSession()
+        {
+            HttpContext.Session.SetString("SelectedDate", LeagueSelectVM.SelectedDate.ToShortDateString());
+        }
+
 
         public virtual IActionResult OnPost()
         {
@@ -88,10 +91,10 @@ namespace KSCApp.Pages
                 return Page();
             }
 
-            HttpContext.Session.SetString("SelectedLeague", LeagueSelectVM.SelectedLeagueId);
-            HttpContext.Session.SetString("SelectedDate", LeagueSelectVM.SelectedDate.ToShortDateString());
+            SetSelectedLeagueSession();
+                     
+            return RedirectToPage();
 
-            return RedirectToPage(LeagueSelectVM.RedirectPage);
         }
 
     }

@@ -9,7 +9,7 @@
 <div class="well col-lg-6 col-lg-offset-3">
     <h3>@Model.Match.Fixture.League.LeagueName</h3>
     <form method="post">
-        <input type="hidden" asp-for="@Model.resultsVM.MatchId" class="form-control" />
+        <input type="hidden" asp-for="@Model.ResultsVM.MatchId" class="form-control" />
         <table class="table">
             <thead>
                 <tr>
@@ -26,107 +26,24 @@
                 </tr>
             </thead>
             <tbody>
+                @for (var i = 0; i<5; i++)
+                {
                 <tr>
                     <td>
-                        1
+                        @Html.TextBoxFor(x => Model.Games[i].GameNo, new { @class = "form-control", @readonly = "readonly" })
                     </td>
 
                     <td>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <input asp-for="resultsVM.Game1PlayerAScore" class="form-control" />
-                            <span asp-validation-for="resultsVM.Game1PlayerAScore" class="text-danger"></span>
-                        </div>
+                        @Html.EditorFor(x => Model.Games[i].PlayerAScore, new { @class = "form-control" })
                     </td>
                     <td></td>
                     <td>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <input asp-for="resultsVM.Game1PlayerBScore" class="form-control" />
-                            <span asp-validation-for="resultsVM.Game1PlayerBScore" class="text-danger"></span>
-                        </div>
+                        @Html.EditorFor(x => Model.Games[i].PlayerBScore, new { @class = "form-control" })
                     </td>
+                
                 </tr>
-                <tr>
-                    <td>
-                        2
-                    </td>
-                    <td>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <input asp-for="resultsVM.Game2PlayerAScore" class="form-control" />
-                            <span asp-validation-for="resultsVM.Game2PlayerAScore" class="text-danger"></span>
-                        </div>
-                    </td>
-                    <td></td>
-                    <td>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <input asp-for="resultsVM.Game2PlayerBScore" class="form-control" />
-                            <span asp-validation-for="resultsVM.Game2PlayerBScore" class="text-danger"></span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        3
-                    </td>
-                    <td>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <input asp-for="resultsVM.Game3PlayerAScore" class="form-control" />
-                            <span asp-validation-for="resultsVM.Game3PlayerAScore" class="text-danger"></span>
-                        </div>
-                    </td>
-                    <td></td>
-                    <td>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <input asp-for="resultsVM.Game3PlayerBScore" class="form-control" />
-                            <span asp-validation-for="resultsVM.Game3PlayerBScore" class="text-danger"></span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        4
-                    </td>
-                    <td>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <input asp-for="resultsVM.Game4PlayerAScore" class="form-control" />
-                            <span asp-validation-for="resultsVM.Game4PlayerAScore" class="text-danger"></span>
-                        </div>
-                    </td>
-                    <td></td>
-                    <td>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <input asp-for="resultsVM.Game4PlayerBScore" class="form-control" />
-                            <span asp-validation-for="resultsVM.Game4PlayerBScore" class="text-danger"></span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        5
-                    </td>
-                    <td>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <input asp-for="resultsVM.Game5PlayerAScore" class="form-control" />
-                            <span asp-validation-for="resultsVM.Game5PlayerAScore" class="text-danger"></span>
-                        </div>
-                    </td>
-                    <td></td>
-                    <td>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <input asp-for="resultsVM.Game5PlayerBScore" class="form-control" />
-                            <span asp-validation-for="resultsVM.Game5PlayerBScore" class="text-danger"></span>
-                        </div>
-                    </td>
-                </tr>
+                }
+
             </tbody>
         </table>
 

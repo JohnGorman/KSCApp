@@ -15,18 +15,14 @@ namespace KSCApp.Pages.Members
     {
         private readonly KSCApp.Data.ApplicationDbContext _context;
 
+        [BindProperty]
+        public MatchSlotSelectVM MatchSlotSelectVM { get; set; }
+        public IList<MatchSlot> AvailableSlots { get; set; }
+
         public MatchToSlotModel(KSCApp.Data.ApplicationDbContext context)
         {
             _context = context;
         }
-
-        //[BindProperty]
-        //public Match Match { get; set; }
-
-        [BindProperty]
-        public MatchSlotSelectVM MatchSlotSelectVM { get; set; }  
-
-        public IList<MatchSlot> AvailableSlots { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -42,12 +38,6 @@ namespace KSCApp.Pages.Members
                         LeagueName = m.Fixture.League.LeagueName,
                         MatchDetails = String.Format("L{0} {1} v {2}", m.Level, m.PlayerA.PlayerName, m.PlayerB.PlayerName)
                     }).FirstOrDefaultAsync();
-
-                
-
-                //MatchSlotSelectVM = Match.Select()
-
-                //MatchSlotSelectVM = AvailableSlots.OrderBy(ms => ms.BookingSlot).FirstOrDefault();
 
                 ViewData["MatchSlotId"] = new SelectList(AvailableSlots, "MatchSlotId", "BookingSlot");
             }
@@ -65,8 +55,6 @@ namespace KSCApp.Pages.Members
             {
                 return Page();
             }
-
-            int tempMatchId = MatchSlotSelectVM.SelectedMatchId;
 
             MatchSlot matchSlot = _context.MatchSlot.FirstOrDefault(ms => ms.MatchSlotId == MatchSlotSelectVM.SelectedMatchSlotId);
 

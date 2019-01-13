@@ -14,59 +14,60 @@ using Microsoft.AspNetCore.Http;
 
 namespace KSCApp.Pages.Admin.Fixtures
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
-        private readonly KSCApp.Data.ApplicationDbContext _context;
 
-        public IndexModel(KSCApp.Data.ApplicationDbContext context)
+        public IndexModel(KSCApp.Data.ApplicationDbContext context) : base(context)
         {
-            _context = context;
         }
 
-        [BindProperty]
-        public League SelectedLeague { get; set; }
+        //[BindProperty]
+        //public League SelectedLeague { get; set; }
 
         public IList<Fixture> Fixture { get;set; }
 
         public async Task OnGetAsync()
         {
-            ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueName");
+            SetCurrentLeague();
 
-            string tempLeagueString = HttpContext.Session.GetString("SelectedLeague");
+            //ViewData["LeagueId"] = new SelectList(_context.League, "LeagueId", "LeagueName");
 
-            int CurrentLeagueId = 1;
+            //string tempLeagueString = HttpContext.Session.GetString("SelectedLeague");
+
+            //int CurrentLeagueId = 1;
 
 
-            if (tempLeagueString == null)
-            {
-                SelectedLeague = _context.League.OrderByDescending(c => c.LeagueId).FirstOrDefault();
-                CurrentLeagueId = SelectedLeague.LeagueId;
-            }
-            else
-            {
-                CurrentLeagueId = Convert.ToInt32(tempLeagueString);
-                SelectedLeague = _context.League.FirstOrDefault(c => c.LeagueId == CurrentLeagueId);
-            }
+            //if (tempLeagueString == null)
+            //{
+            //    SelectedLeague = _context.League.OrderByDescending(c => c.LeagueId).FirstOrDefault();
+            //    CurrentLeagueId = SelectedLeague.LeagueId;
+            //}
+            //else
+            //{
+            //    CurrentLeagueId = Convert.ToInt32(tempLeagueString);
+            //    SelectedLeague = _context.League.FirstOrDefault(c => c.LeagueId == CurrentLeagueId);
+            //}
 
-            Fixture = await _context.Fixture.Where(f=>f.LeagueId == CurrentLeagueId)
+
+            Fixture = await _context.Fixture.Where(f=>f.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId)
                 .Include(f => f.League)
                 .Include(f => f.TeamA)
                 .Include(f => f.TeamB).ToListAsync();
         }
 
 
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+        //public IActionResult OnPost()
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Page();
+        //    }
 
 
-            HttpContext.Session.SetString("SelectedLeague", SelectedLeague.LeagueId.ToString());
+        //    HttpContext.Session.SetString("SelectedLeague", SelectedLeague.LeagueId.ToString());
 
-            return RedirectToPage("./Index");
-        }
+        //    return RedirectToPage("./Index");
+        //}
 
 
     }

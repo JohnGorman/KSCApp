@@ -16,14 +16,15 @@ namespace KSCApp.Pages
 {
     public class TeamsModel : PageModel
     {
-        //private readonly ITeamPlayerService _teamPlayerService;
-
         private readonly ApplicationDbContext _context;
+
+        public IList<TeamPlayer> Team { get; set; }
+        public string TeamDetails { get; set; }
+        public string LeagueDetails { get; set; }
 
         public TeamsModel(ApplicationDbContext context)
         {
             _context = context;
-            //_teamPlayerService = teamPlayerService;
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -37,19 +38,14 @@ namespace KSCApp.Pages
 
             TeamDetails = SelectedTeam.TeamName;
 
-            int LeagueId = SelectedTeam.LeagueId;
-
-            var SelectedLeague = await _context.League.FirstOrDefaultAsync(l => l.LeagueId == LeagueId);
+            var SelectedLeague = await _context.League.FirstOrDefaultAsync(l => l.LeagueId == SelectedTeam.LeagueId);
 
             LeagueDetails = SelectedLeague.LeagueName;
-
-            //Team = await _teamPlayerService.GetTeamPlayersForTeamAsync(id);
 
             Team = await _context.TeamPlayer.Where(tp => tp.TeamId == id)
                                             .Include(p => p.Player)
                                             .OrderBy(t => t.Level)
                                             .ToListAsync();
-
 
             if (Team == null)
             {
@@ -57,17 +53,7 @@ namespace KSCApp.Pages
             }
 
             return Page();
-
-
         }
-
-        [BindProperty]
-        public IList<TeamPlayer> Team { get; set; }
-        public string TeamDetails { get; set; }
-        public string LeagueDetails { get; set; }
-
-
-
 
     }
 }

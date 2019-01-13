@@ -5,82 +5,76 @@
     ViewData["Title"] = "Fixtures";
 }
 
-<div class="HomeTitle">
-    <h2>Fixtures</h2>
-    <h3>@Model.SelectedLeague.LeagueName</h3>
+<div class="topdiv">
+    <div class="HomeTitle">
+        <h2>Fixtures</h2>
+    </div>
+
+    @Html.Partial("_LeagueSelectPartial", @Model.LeagueSelectVM)
+    
+</div>
+
+
+<div class="topdiv">
+
+    <h4>@Model.LeagueSelectVM.SelectedLeague.LeagueName</h4>
+
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fixture[0].PlayDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fixture[0].TeamA.TeamNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fixture[0].TeamA)
+                </th>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fixture[0].TeamB.TeamNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fixture[0].TeamB)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Fixture)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlayDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamA.TeamNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamA.TeamName)
+                    </td>
+                    <td>Vs</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamB.TeamNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamB.TeamName)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
     <p>
-        <a asp-page="Create">Create New or Edit</a>
+        <a asp-page="Create">Create New League Fixtures and Matches</a>
     </p>
 </div>
-<br />
-
-
-<div class="col-lg-3 LeagueSelect">
-    <div>
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Select League</label>
-                <select asp-for="SelectedLeague.LeagueId" class="form-control" asp-items="ViewBag.LeagueId" onchange="this.form.submit()"></select>
-            </div>
-        </form>
-    </div>
-</div>
 
 
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Fixture[0].PlayDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fixture[0].TeamA.TeamNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fixture[0].TeamA)
-            </th>
-            <th></th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fixture[0].TeamB.TeamNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fixture[0].TeamB)
-            </th>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Fixture)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlayDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamA.TeamNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamA.TeamName)
-            </td>
-            <td>Vs</td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamB.TeamNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamB.TeamName)
-            </td>
-
-
-            @*<td>
-                <a asp-page="./Edit" asp-route-id="@item.FixtureId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.FixtureId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FixtureId">Delete</a>
-            </td>*@
-        </tr>
-        }
-    </tbody>
-</table>
