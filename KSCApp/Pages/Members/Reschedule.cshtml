@@ -36,15 +36,15 @@
     {
         <div class="well col-lg-4">
             <p>
-                @Html.DisplayFor(modelItem => item.Match.Fixture.League.LeagueName)
+                @Html.DisplayFor(modelItem => item.Fixture.League.LeagueName)
             </p>
             <p>
-                (L @item.Match.Level) @item.Match.PlayerA.PlayerName v @item.Match.PlayerB.PlayerName
+                (L @item.Level) @item.PlayerA.PlayerName v @item.PlayerB.PlayerName
             </p>
-            <p>Originally Planned @item.BookingSlot.ToShortDateString() </p>
+            <p>Originally Planned @item.Fixture.PlayDate.ToShortDateString() </p>
 
-            <a asp-page="./MatchScore" asp-route-id="@item.Match.MatchId">Enter Result</a> |
-            <a asp-page="./MatchToSlot" asp-route-id="@item.Match.MatchId">Re-Schedule</a>
+            <a asp-page="./MatchScore" asp-route-id="@item.MatchId">Enter Result</a> |
+            <a asp-page="./MatchToSlot" asp-route-id="@item.MatchId">Re-Schedule</a>
         </div>
     }
 </div>

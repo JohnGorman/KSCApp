@@ -14,7 +14,7 @@ namespace KSCApp.Pages.Members
 {
     public class RescheduleModel : BasePageModel
     {
-        public List<MatchSlot> OverDueMatches { get; set; }
+        public List<Match> OverDueMatches { get; set; }
         public IQueryable<Match> CancelledMatches { get; set; }
 
         public RescheduleModel(KSCApp.Data.ApplicationDbContext context) : base(context)
@@ -41,7 +41,7 @@ namespace KSCApp.Pages.Members
                 }
             }
 
-            //List a of all MatchIds in MatchSlots
+            //List A of all MatchIds in MatchSlots
             var a = _context.MatchSlot.Where(ms => ms.MatchId != null)
                 .Select(m => new
                 {
@@ -49,7 +49,7 @@ namespace KSCApp.Pages.Members
                 }).ToList();
 
 
-            //List of all Matches where MatchId NOT in list a
+            //List of all Matches where MatchId NOT in list A
             CancelledMatches = _context.Match.Where(m1 => !a.Any(m2 => m2.id == m1.MatchId) && m1.Played==false  && m1.Fixture.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId)
                 .Include(m=>m.PlayerA)
                 .Include(m=>m.PlayerB)
@@ -58,10 +58,11 @@ namespace KSCApp.Pages.Members
 
             //List of all Matches that are overdue
             OverDueMatches = await _context.MatchSlot.Where(m => m.Match.Played == false && m.BookingSlot < DateTime.Today)
-                .Include(m => m.Match.PlayerA)
-                .Include(m => m.Match.PlayerB)
-                .Include(m => m.Match.Fixture.League)
-                .Where(m=>m.Match.Fixture.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId).ToListAsync();
+                .Select(m=>m.Match)
+                .Include(m => m.PlayerA)
+                .Include(m => m.PlayerB)
+                .Include(m => m.Fixture.League)
+                .Where(m=>m.Fixture.LeagueId == LeagueSelectVM.SelectedLeague.LeagueId).Distinct().ToListAsync();
 
             return Page();
         }

@@ -67,6 +67,9 @@ namespace KSCApp
                     policy => policy.RequireRole("Member"));
             });
 
+            //SendGrid Email Service Setup
+            //services.AddTransient<IEmailSender, EmailSender>();
+
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
