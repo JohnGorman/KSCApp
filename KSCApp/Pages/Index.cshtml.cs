@@ -20,21 +20,18 @@ namespace KSCApp.Pages
     public class IndexModel : BasePageModel
     {
         private readonly ITeamPlayerService _teamPlayerService;
-        private readonly IConfiguration _configuration;
 
         public IList<TeamVM> LeagueTableA { get; set; }
         public IList<TeamVM> LeagueTableB { get; set; }
         public string Message;
 
-        public IndexModel(KSCApp.Data.ApplicationDbContext context, ITeamPlayerService teamPlayerService, IConfiguration configuration) : base(context)
+        public IndexModel(KSCApp.Data.ApplicationDbContext context, ITeamPlayerService teamPlayerService) : base(context)
         {
             _teamPlayerService = teamPlayerService;
-            _configuration = configuration;
         }
 
         public async Task OnGetAsync()
         {
-            Message = "My key val = " + _configuration["SecretDataConnection"];
 
             SetCurrentLeague();
 
