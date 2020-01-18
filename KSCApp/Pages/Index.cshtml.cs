@@ -24,7 +24,7 @@ namespace KSCApp.Pages
 
         public IList<TeamVM> LeagueTableA { get; set; }
         public IList<TeamVM> LeagueTableB { get; set; }
-        public string Message;
+        //public string Message;
 
         public IndexModel(KSCApp.Data.ApplicationDbContext context, ITeamPlayerService teamPlayerService, IConfiguration configuration) : base(context)
         {
@@ -34,7 +34,7 @@ namespace KSCApp.Pages
 
         public async Task OnGetAsync()
         {
-            Message = "My key val = " + _configuration["SecretDataConnection"];
+            //Message = "My key val = " + _configuration["SecretDataConnection"];
 
             SetCurrentLeague();
 

@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using KSCApp.Models;
 using KSCApp.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace KSCApp
 {
@@ -68,8 +69,8 @@ namespace KSCApp
             });
 
             //SendGrid Email Service Setup
-            //services.AddTransient<IEmailSender, EmailSender>();
-
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>

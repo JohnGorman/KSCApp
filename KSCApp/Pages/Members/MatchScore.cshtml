@@ -1,55 +1,62 @@
 ﻿@page
 @model KSCApp.Pages.Members.MatchScoreModel
 
+<style>
+    .input text-box {
+        width: 50px;
+    }
+    </style>
 
 <div class="topdiv">
     <h2>Enter Match Score</h2>
 </div>
 
+@*<div class="well col-lg-5">*@
 <div class="well col-lg-6 col-lg-offset-3">
-    <h3>@Model.Match.Fixture.League.LeagueName</h3>
-    <form method="post">
-        <input type="hidden" asp-for="@Model.ResultsVM.MatchId" class="form-control" />
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        <p>Game</p>
-                    </th>
-                    <th>
-                        <p>@Model.Match.PlayerA.PlayerName</p>
-                    </th>
-                    <th><p>v</p></th>
-                    <th>
-                        <p>@Model.Match.PlayerB.PlayerName</p>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (var i = 0; i<5; i++)
-                {
-                <tr>
-                    <td>
-                        @Html.TextBoxFor(x => Model.Games[i].GameNo, new { @class = "form-control", @readonly = "readonly" })
-                    </td>
+        <h3>@Model.Match.Fixture.League.LeagueName</h3>
+        <form method="post">
+            <input type="hidden" asp-for="@Model.ResultsVM.MatchId" class="form-control" />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <p>Game</p>
+                        </th>
+                        <th>
+                            <p>@Model.Match.PlayerA.PlayerName</p>
+                        </th>
+                        <th><p>v</p></th>
+                        <th>
+                            <p>@Model.Match.PlayerB.PlayerName</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < 5; i++)
+        {
+            <tr>
+                <td>
+                    @Html.TextBoxFor(x => Model.Games[i].GameNo, new { @class = "form-control", @readonly = "readonly" })
+                </td>
 
-                    <td>
-                        @Html.EditorFor(x => Model.Games[i].PlayerAScore, new { @class = "form-control" })
-                    </td>
-                    <td></td>
-                    <td>
-                        @Html.EditorFor(x => Model.Games[i].PlayerBScore, new { @class = "form-control" })
-                    </td>
-                
-                </tr>
-                }
+                <td>
+                    @Html.EditorFor(x => Model.Games[i].PlayerAScore, new { @class = "form-control" })
+                </td>
+                <td></td>
+                <td>
+                    @Html.EditorFor(x => Model.Games[i].PlayerBScore, new { @class = "form-control" })
+                </td>
 
-            </tbody>
-        </table>
+            </tr>
+        }
 
-        <div class="form-group">
-            <input type="submit" value="Post Result" class="btn btn-primary" />
-        </div>
-    </form>
-    <a asp-page="./Index">Cancel</a>
-</div>
+
+                </tbody>
+            </table>
+
+            <div class="form-group">
+                <input type="submit" value="Post Result" class="btn btn-primary" />
+            </div>
+        </form>
+        <a asp-page="./Index">Cancel</a>
+    </div>
